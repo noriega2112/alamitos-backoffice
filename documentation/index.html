@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<!-- Title -->
+	<title>FinLab React Crypto Trading UI Admin</title>
+		
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	
+	<!-- Css Style -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/scrollbar.css">
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="plugins/jstree/dist/themes/default/style.min.css">
+	
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900|Open+Sans:300,400,600,700,800|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+	
+</head>
+<body data-spy="scroll" data-target=".nav-bar" data-offset="50">
+<div class="wrapper" id="tableofcontent">
+
+	<!-- Sidebar Holder -->
+	<nav id="nevbarleft">
+		<div class="side-nav full-height">
+			<div class="sidebar-header">
+				<h2>
+					<svg class="logo-abbr" width="39" height="31" viewBox="0 0 39 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M25.125 21.125L26.9952 23.2623C27.6771 24.0417 28.8616 24.1206 29.6409 23.4387C29.7036 23.3839 29.7625 23.325 29.8173 23.2623L31.6875 21.125H36.375C35.2848 26.5762 30.4985 30.5 24.9393 30.5H14.0607C8.5015 30.5 3.71523 26.5762 2.625 21.125H25.125Z" fill="white"></path>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M36.375 9.875H2.625C3.71523 4.4238 8.5015 0.5 14.0607 0.5H24.9393C30.4985 0.5 35.2848 4.4238 36.375 9.875Z" fill="white"></path>
+						<path opacity="0.3" d="M36.375 13.625H2.625C1.58947 13.625 0.75 14.4645 0.75 15.5C0.75 16.5355 1.58947 17.375 2.625 17.375H36.375C37.4105 17.375 38.25 16.5355 38.25 15.5C38.25 14.4645 37.4105 13.625 36.375 13.625Z" fill="white"></path>
+					</svg>
+					<img src="images/logo.png" alt="logo"/>
+				</h2>
+			</div>
+			<div class="nav-bar">
+				<ul class="list-unstyled content-scroll components navbar-nav nav" id="download-button">
+					<li class="active"><a href="#introduction">Introduction</a></li>
+					<li><a href="#react">Installation </a></li>
+					<li><a href="#sass-compile">Sass Compile</a></li>
+					<li><a href="#folder_directories">Folder Directories</a></li>
+					<li><a href="#theme-feature">Theme Features</a></li>
+					<li><a href="#plugins"> Credit</a></li>
+					<li><a href="#main">Project Main Features</a></li>
+					<li><a href="#main-content">Main Content</a></li>
+					<li><a href="#create-page">Create Page</a></li>					
+					<li><a href="#our_product">Our Products </a></li>
+					<!-- <li><a href="#custom_work">Custom Work Requirements </a></li> -->
+					<li><a href="#version_history">Version History</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<!-- Page Content Holder -->
+	<div id="content">
+		
+		<!-- Navber -->
+		<nav class="navbar navbar-default top-nav-bar ">
+			<div class="container-fluid">
+				<div class="navbar-header">
+				   <button type="button" id="sidebarCollapse" class="navbar-btn">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+				<a href="https://support.w3itexperts.com/" target="_blank" class="site-button support-button">Support</a>
+				<a href="https://themeforest.net/user/dexignlabs/portfolio" target="_blank"  class="site-button support-button">Buy Now</a>
+			</div>
+		</nav>
+		
+		<!-- Banner -->
+		<section class="app-brief slide-banner">
+			<div class="container">
+				<div class="section-header">
+					<h2>FinLab React Crypto Trading UI Admin</h2>
+					<div class="colored-line"></div>
+					<div class="section-description">
+						FinLab React Crypto Trading UI Admin
+					</div>
+					<div class="colored-line"></div>
+				</div>
+			</div>
+		</section>
+		
+		<!-- Introduction -->
+		<section class="app-brief" id="introduction">
+			<div class="container center-align">
+				<h1>FinLab</h1>
+				<h3>FinLab React Crypto Trading UI Admin</h3>
+				<p>FinLab is a popular open source WebApp template for admin dashboards and admin panels. It utilizes all of the react-bootstrap components in design and re-styles many commonly used plugins to create a consistent design that can be used as a user interface for backend applications. </p>
+				<p>Thank you for purchasing this React template.</p>
+				<p><strong>If you like this template, Please support us by rating this template with 5 stars </strong> </p>
+			</div>
+		</section>
+		<hr/>
+		
+		
+		
+		<!--  React.JS Installation & Setup   -->
+		<section class="app-brief" id="react">
+			<div class="container left-align">
+				<div class="section-header">
+					<h2 class="dark-text title"> React.JS Installation & Setup - </h2>
+				</div>
+				<div class="react-init">
+					<h3 class="title">1.- Install npm</h3>
+					<p>It will create 'node_module' folder in this all dependency files will be install with this command.
+						<code>npm install</code></p>
+						<pre class="brush:javascript; h-100">npm install
+						</pre>					
+					<h3 class="title">2.- Run Project</h3>
+					<p>With is command file will be compiled and it will be loaded on local server `http://localhost:3000`.
+						<code>npm start</code></p>
+						<pre class="brush: javascript; h-100">npm start
+					</pre>
+					<h3 class="title">3.- Production Build</h3>
+					<p>Node-sass is an NPM package that compiles Sass to CSS (which it does very quickly too). To install node-sass run the following command in your terminal:  <code>npm run build</code></p>
+						<pre class="brush: javascript; h-100">npm run build
+						</pre>
+					<h3 class="title">4.- Note:</h3>
+					<p>To get more help on the React.js checkout <a href="https://reactjs.org/">React</a></p>
+					<h3 class="title">4.- Further help</h3>
+					<p> You can learn more in the <a href="https://facebook.github.io/create-react-app/docs/getting-started"> Create React App Documentation</a> To learn React, check out the <a href="https://reactjs.org/">React Documentation</a>.</p>
+					
+				</div>
+			</div>	
+		</section>
+		<hr/>
+		
+		
+		<!-- Sass Compile -->
+		<section class="app-brief" id="sass-compile">
+			<div class="container left-align">
+				<div class="section-header">
+					<h2 class="dark-text title">Sass Compile - </h2>
+				</div>
+				<div class="sass-compile">
+					<h3 class="title">1.- Install Node.js</h3>
+					<p>To compile Sass via the command line first, we need to install <a href="https://nodejs.org/en/" target="_blank">node.js</a>. The easiest way is downloading it from the official website nodejs.org open the package and follow the wizard.</p>
+					
+					<h3 class="title">2.- Initialize NPM</h3>
+					<p>NPM is the Node Package Manager for JavaScript. NPM makes it easy to install and uninstall third party packages. To initialize a Sass project with NPM, open your terminal and CD (change directory) to your project folder.</p>
+<pre class="brush: javascript; h-100">npm init
+</pre>
+<img src="images/cmd.png" alt="">
+<p>Once in the correct folder, run the command <code>npm init</code>. You will be prompted to answer several questions about the project, after which NPM will generate a <code>package.json</code> file in your folder.</p>
+
+
+					<h3 class="title">3.- Install Node-Sass</h3>
+					<p>Node-sass is an NPM package that compiles Sass to CSS (which it does very quickly too). To install node-sass run the following command in your terminal:  <code>npm install node-sass</code></p>
+<pre class="brush: javascript; h-100">npm install node-sass
+</pre>
+
+					<h3 class="title">4.- Write Node-sass Command</h3>
+					<p>Everything is ready to write a small script in order to compile Sass. Open the package.json file in a code editor. You will see something like this:</p>
+					<p>In the scripts section add an <strong>scss command</strong></p>
+					<!-- <img src="images/jsn.png" alt=""> -->
+<pre class="brush: javascript; h-100">"scripts": {
+  "sass": "node-sass --watch src/scss/main.scss src/css/style.css --source-map src/css/style.css.map"
+},
+</pre>
+					
+					<h3 class="title">5.- Run the Script</h3>
+					<p>To execute our one-line script, we need to run the following command in the terminal: <code>npm run sass</code></p>
+<pre class="brush: javascript; h-100">npm run sass
+</pre>
+				</div>
+			</div>	
+		</section>
+		<hr/>
+		
+		<!-- Folder Directories -->
+		<section class="app-brief" id="folder_directories">
+			<div class="container left-align">
+				<div class="section-header">
+					<h2 class="dark-text">Folder Directories - </h2>
+				</div>
+				<div id="dz_tree" class="tree-demo">
+					<ul>
+						<li data-jstree='{ "opened" : true }'>public
+							<ul>
+								<li data-jstree='{ "type" : "file" }'>index.html</li>
+							</ul>
+						</li>	
+						<li data-jstree='{ "opened" : true }'>src
+							<ul>
+								<li data-jstree='{ "selected" : false }'>context
+									<ul>
+										<li data-jstree='{ "type" : "file" }'>ThemeContext.js</li>
+										<li data-jstree='{ "type" : "file" }'>ThemeDemo.js</li>
+									</ul>	
+								</li>
+								<li data-jstree='{ "selected" : false }'>css</li>
+								<li data-jstree='{ "selected" : false }'>icons
+									<ul>
+										<li data-jstree='{ "opened" : true }'>avasta</li>
+										<li data-jstree='{ "opened" : true }'>bootstrap-icons</li>
+										<li data-jstree='{ "opened" : true }'>feather</li>
+										<li data-jstree='{ "opened" : true }'>flaticon</li>
+										<li data-jstree='{ "opened" : true }'>fontawesome</li>
+										<li data-jstree='{ "opened" : true }'>helveticaNeue</li>
+										<li data-jstree='{ "opened" : true }'>icomoon</li>
+										<li data-jstree='{ "opened" : true }'>line-awesome</li>
+										<li data-jstree='{ "opened" : true }'>material-design-iconic-font</li>
+										<li data-jstree='{ "opened" : true }'>simple-line-icons</li>
+										<li data-jstree='{ "opened" : true }'>themify-icons</li>
+									</ul>
+								</li>
+								<li data-jstree='{ "selected" : false }'>images
+									<ul>
+										<li data-jstree='{ "opened" : true }'>avatar</li>
+										<li data-jstree='{ "opened" : true }'>big</li>
+										<li data-jstree='{ "opened" : true }'>browser</li>
+										<li data-jstree='{ "opened" : true }'>card</li>
+										<li data-jstree='{ "opened" : true }'>contact</li>
+										<li data-jstree='{ "opened" : true }'>coures</li>
+										<li data-jstree='{ "opened" : true }'>customers</li>
+										<li data-jstree='{ "opened" : true }'>demo</li>
+										<li data-jstree='{ "opened" : true }'>pattern</li>
+										<li data-jstree='{ "opened" : true }'>product</li>
+										<li data-jstree='{ "opened" : true }'>profile</li>
+										<li data-jstree='{ "opened" : true }'>tab</li>
+										<li data-jstree='{ "opened" : true }'>table</li>
+									</ul>
+								</li>
+								<li data-jstree='{ "opened" : true }'>jsx
+									<ul>
+										<li data-jstree='{ "selected" : false }'>components
+											<ul>
+												<li data-jstree='{ "opened" : true }'>AppsMenu</li>
+												<li data-jstree='{ "opened" : true }'>bootstrap</li>
+												<li data-jstree='{ "opened" : true }'>charts</li>
+												<li data-jstree='{ "opened" : true }'>chatBox</li>
+												<li data-jstree='{ "opened" : true }'>Dashboard</li>
+												<li data-jstree='{ "opened" : true }'>Forms</li>
+												<li data-jstree='{ "opened" : true }'>PluginsMenu</li>
+												<li data-jstree='{ "opened" : true }'>table</li>
+											</ul>	
+										</li>
+											
+										<li data-jstree='{  "selected" : false  }'>layouts
+											<ul>
+												<li data-jstree='{ "opened" : false }'>nav
+													<ul>
+														<li data-jstree='{ "type" : "file" }'>Header.js</li>
+														<li data-jstree='{ "type" : "file" }'>NavHader.js</li>
+														<li data-jstree='{ "type" : "file" }'>SideBar.js</li>
+													</ul>	
+												</li>
+												<li data-jstree='{ "type" : "file" }'>ChatBox</li>
+												<li data-jstree='{ "type" : "file" }'>EventSidebar.js</li>
+												<li data-jstree='{ "type" : "file" }'>Footer.js</li>
+												<li data-jstree='{ "type" : "file" }'>PageTitle.js</li>
+												<li data-jstree='{ "type" : "file" }'>Setting.js</li>
+											</ul>	
+										</li>
+										
+										<li data-jstree='{  "selected" : false  }'>pages
+											<ul>
+												<li data-jstree='{ "type" : "file" }'>Error400.js</li>
+												<li data-jstree='{ "type" : "file" }'>Error403.js</li>
+												<li data-jstree='{ "type" : "file" }'>Error404.js</li>
+												<li data-jstree='{ "type" : "file" }'>Error500.js</li>
+												<li data-jstree='{ "type" : "file" }'>Error503.js</li>
+												<li data-jstree='{ "type" : "file" }'>ForgotPassword.js</li>
+												<li data-jstree='{ "type" : "file" }'>LockScreen.js</li>
+												<li data-jstree='{ "type" : "file" }'>Login.js</li>
+												<li data-jstree='{ "type" : "file" }'>Registration.js</li>
+												<li data-jstree='{ "type" : "file" }'>Widget.js</li>
+											</ul>
+										
+										</li>
+										<li data-jstree='{ "type" : "file" }'>index.js</li>
+									</ul>
+								</li>
+								<li data-jstree='{ "selected" : false }'>scss
+									<ul>
+										<li data-jstree='{ "opened" : true }'>abstracts</li>
+										<li data-jstree='{ "opened" : true }'>base</li>
+										<li data-jstree='{ "selected" : false }'>components
+											<ul>
+												<li data-jstree='{ "opened" : true }'>app</li>
+												<li data-jstree='{ "opened" : true }'>charts</li>
+												<li data-jstree='{ "opened" : true }'>forms</li>
+												<li data-jstree='{ "opened" : true }'>ico</li>
+												<li data-jstree='{ "opened" : true }'>map</li>
+												<li data-jstree='{ "opened" : true }'>tables</li>
+												<li data-jstree='{ "opened" : true }'>uc</li>
+												<li data-jstree='{ "opened" : true }'>ui</li>
+												<li data-jstree='{ "opened" : true }'>widget</li>
+											</ul>
+										</li>
+										<li data-jstree='{ "selected" : false }'>layout
+											<ul>
+												<li data-jstree='{ "opened" : true }'>footer</li>
+												<li data-jstree='{ "opened" : true }'>header</li>
+												<li data-jstree='{ "opened" : true }'>rtl</li>
+												<li data-jstree='{ "opened" : true }'>sidebar</li>
+												<li data-jstree='{ "opened" : true }'>theme</li>
+												<li data-jstree='{ "opened" : true }'>typography</li>
+												<li data-jstree='{ "opened" : true }'>version-dark</li>
+												<li data-jstree='{ "opened" : true }'>version-transparent</li>
+											</ul>
+										</li>
+										<li data-jstree='{ "opened" : true }'>pages</li>
+										<li data-jstree='{ "type" : "file" }'>main.scss</li>
+									</ul>
+								</li>
+								<li data-jstree='{"selected: false"}'>services
+									<ul>
+									  <li data-jstree='{ "type" : "file" }'>AuthService.js</li>
+									  <li data-jstree='{ "type" : "file" }'>AxiosInstance.js</li>
+									  <li data-jstree='{ "type" : "file" }'>PostsService.js</li>
+									</ul>
+								</li>
+								<li data-jstree='{"selected: false"}'>store
+									<ul>
+									  <li data-jstree='{ "selected : false" }'>actions</li>
+									  <li data-jstree='{ "selected : false" }'>reducers</li>
+									  <li data-jstree='{ "selected : false" }'>selectors</li>
+									  <li data-jstree='{ "type" : "file" }'>store.js</li>
+									</ul>
+								</li>
+								<li data-jstree='{ "selected" : false }'>vendor
+									<ul>
+										<li data-jstree='{ "opened" : true }'>animate</li>
+										<li data-jstree='{ "opened" : true }'>aos</li>
+										<li data-jstree='{ "opened" : true }'>bootstrap-select</li>
+										<li data-jstree='{ "opened" : true }'>bootstrap-v4-rtl</li>
+										<li data-jstree='{ "opened" : true }'>deznav</li>
+										<li data-jstree='{ "opened" : true }'>metismenu</li>
+										<li data-jstree='{ "opened" : true }'>perfect-scrollbar</li>
+										<li data-jstree='{ "opened" : true }'>swiper</li>
+									</ul>
+								</li>
+								<li data-jstree='{ "type" : "file" }'>App.js</li>
+								<li data-jstree='{ "type" : "file" }'>index.js</li>
+							</ul>
+						</li>
+						<li data-jstree='{ "type" : "file" }'>package.json</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<hr/>
+		
+		<!-- Theme Feature -->
+		<section class="app-brief" id="theme-feature">
+			<div class="container left-align">
+				<div class="section-header">
+					<h2 class="dark-text">Theme Features - </h2>
+					<h4>Layout is controlled by settings object LayoutSettings inside <strong>src/context/ThemeContext.js</strong></h4>
+				</div>
+<pre>
+import React, { createContext, useEffect, useState } from "react";
+const ThemeContextProvider = (props) =&gt; {    
+    useEffect(() =&gt; {
+	const body = document.querySelector("body");
+        body.setAttribute("data-typography", "poppins");
+        body.setAttribute("data-theme-version", "light");  // light, dark
+        body.setAttribute("data-layout", "vertical");
+        body.setAttribute("data-nav-headerbg", "color_3");
+        body.setAttribute("data-headerbg", "color_3");
+        body.setAttribute("data-sidebar-style", "full");
+        body.setAttribute("data-sibebarbg", "color_1");
+        body.setAttribute("data-sidebar-position", "fixed");
+        body.setAttribute("data-header-position", "fixed");
+        body.setAttribute("data-container", "wide");
+	    body.setAttribute("data-primary", "color_1");
+        body.setAttribute("direction", "ltr"); 
+
+        resizeWindow();
+        window.addEventListener("resize", resizeWindow);
+        return () => window.removeEventListener("resize", resizeWindow);
+      }, []);
+      return (
+        &lt;ThemeContext.Provider
+          value={{
+            body,
+          }}
+    >
+      {props.children}
+    &lt;/ThemeContext.Provider&gt;
+  );
+};
+
+export default ThemeContextProvider;
+</pre>
+				<div class="row demo-row m-b30">
+					<div class="col-lg-5">
+				<pre class="brush: javascript; h-100">
+
+useEffect(() =&gt; {
+  const body = document.querySelector("body");
+  body.setAttribute("data-typography", "poppins");
+  body.setAttribute("data-theme-version", "light");
+  body.setAttribute("data-layout", "vertical");
+  body.setAttribute("data-nav-headerbg", "color_3");
+  body.setAttribute("data-headerbg", "color_3");
+  body.setAttribute("data-sidebar-style", "full");
+  body.setAttribute("data-sibebarbg", "color_1");
+  body.setAttribute("data-sidebar-position", "fixed");
+  body.setAttribute("data-header-position", "fixed");
+  body.setAttribute("data-container", "wide");
+  body.setAttribute("data-primary", "color_1");
+  body.setAttribute("direction", "ltr"); 
+}, []);
+</pre>
+					</div>
+					<div class="col-lg-7">
+						<img src="images/demo/pic9.jpg" alt="" class="w-100 demo-img">
+					</div>
+				
+				</div>
+				<h3>Color Theme - </h3>
+				<p>So many color option available</p>
+				<ul class="color-list m-b30">
+					<li>
+						<div class="overlay-text color-1">color_1</div>
+					</li>
+					<li>
+						<div class="overlay-text color-2">color_2</div>
+					</li>
+					<li>
+						<div class="overlay-text color-3">color_3</div>
+					</li>
+					<li>
+						<div class="overlay-text color-4">color_4</div>
+					</li>
+					<li>
+						<div class="overlay-text color-5">color_5</div>
+					</li>
+					<li>
+						<div class="overlay-text  color-6">color_6</div>
+					</li>
+					<li>
+						<div class="overlay-text  color-7">color_7</div>
+					</li>
+					<li>
+						<div class="overlay-text  color-8 text-black border">color_8</div>
+					</li>
+					<li>
+						<div class="overlay-text  color-9">color_9</div>
+					</li>
+					<li>
+						<div class="overlay-text  color-10">color_10</div>
+					</li>
+					<li>
+						<div class="overlay-text  color-11">color_11</div>
+					</li>
+					<li>
+						<div class="overlay-text  color-12">color_12</div>
+					</li>
+					<li>
+						<div class="overlay-text  color-13">color_13</div>
+					</li>
+					<li>
+						<div class="overlay-text  color-14">color_14</div>
+					</li>
+					<li>
+						<div class="overlay-text  color-15">color_15</div>
+					</li>
+					
+				</ul>
+
+				
+			<ul class="nav nav-pills m-b15">
+				<li class="active"><a data-toggle="tab" href="#themeSet1">Theme Set-1</a></li>
+				<li><a data-toggle="tab" href="#themeSet2">Theme Set-2</a></li>
+				<li><a data-toggle="tab" href="#themeSet3">Theme Set-3</a></li>
+				<li><a data-toggle="tab" href="#themeSet4">Theme Set-4</a></li>
+				<li><a data-toggle="tab" href="#themeSet5">Theme Set-5</a></li>
+				<li><a data-toggle="tab" href="#themeSet6">Theme Set-6</a></li>
+				<li><a data-toggle="tab" href="#themeSet7">Theme Set-7</a></li>
+				<li><a data-toggle="tab" href="#themeSet8">Theme Set-8</a></li>
+			  </ul>
+
+			  <div class="tab-content">
+				<div id="themeSet1" class="tab-pane fade in active">
+				  <div class="row demo-row">
+					<div class="col-lg-5">
+<pre class="brush: javascript; h-100">
+useEffect(() =&gt; {
+  const body = document.querySelector("body");
+  body.setAttribute("data-typography", "poppins");
+  body.setAttribute("data-theme-version", "light");
+  body.setAttribute("data-layout", "horizontal");
+  body.setAttribute("data-nav-headerbg", "color_1");
+  body.setAttribute("data-headerbg", "color_1");
+  body.setAttribute("data-sidebar-style", "full");
+  body.setAttribute("data-sibebarbg", "color_6");
+  body.setAttribute("data-sidebar-position", "fixed");
+  body.setAttribute("data-header-position", "fixed");
+  body.setAttribute("data-container", "wide");
+  body.setAttribute("data-primary", "color_7");
+  body.setAttribute("direction", "ltr"); 
+}, []);
+</pre>
+					</div>
+					<div class="col-lg-7">
+						<img src="images/demo/pic1.jpg" alt="" class="w-100 demo-img">
+					</div>
+				
+				</div>
+				</div>
+				<div id="themeSet2" class="tab-pane fade">
+				  <div class="row demo-row">
+					<div class="col-lg-5">
+<pre class="brush: javascript; h-100">
+useEffect(() =&gt; {
+  const body = document.querySelector("body");
+  body.setAttribute("data-typography", "poppins");
+  body.setAttribute("data-theme-version", "light");
+  body.setAttribute("data-layout", "horizontal");
+  body.setAttribute("data-nav-headerbg", "color_2");
+  body.setAttribute("data-headerbg", "color_2");
+  body.setAttribute("data-sidebar-style", "full");
+  body.setAttribute("data-sibebarbg", "color_1");
+  body.setAttribute("data-sidebar-position", "fixed");
+  body.setAttribute("data-header-position", "fixed");
+  body.setAttribute("data-container", "boxed");
+  body.setAttribute("data-primary", "color_2");
+  body.setAttribute("direction", "ltr"); 
+}, []);
+</pre>
+					</div>
+					<div class="col-lg-7">
+						<img src="images/demo/pic2.jpg" alt="" class="w-100 demo-img">
+					</div>
+				
+				</div>
+				</div>
+				<div id="themeSet3" class="tab-pane fade">
+				  <div class="row demo-row">
+					<div class="col-lg-5">
+<pre class="brush: javascript; h-100">
+useEffect(() =&gt; {
+  const body = document.querySelector("body");
+  body.setAttribute("data-typography", "poppins");
+  body.setAttribute("data-theme-version", "light");
+  body.setAttribute("data-layout", "vertical");
+  body.setAttribute("data-nav-headerbg", "color_8");
+  body.setAttribute("data-headerbg", "color_1");
+  body.setAttribute("data-sidebar-style", "full");
+  body.setAttribute("data-sibebarbg", "color_1");
+  body.setAttribute("data-sidebar-position", "fixed");
+  body.setAttribute("data-header-position", "fixed");
+  body.setAttribute("data-container", "wide");
+  body.setAttribute("data-primary", "color_8");
+  body.setAttribute("direction", "ltr"); 
+}, []);
+</pre>
+					</div>
+					<div class="col-lg-7">
+						<img src="images/demo/pic3.jpg" alt="" class="w-100 demo-img">
+					</div>
+				
+				</div>
+				</div>
+				<div id="themeSet4" class="tab-pane fade">
+				  <div class="row demo-row">
+					<div class="col-lg-5">
+<pre class="brush: javascript; h-100">
+useEffect(() =&gt; {
+  const body = document.querySelector("body");
+  body.setAttribute("data-typography", "poppins");
+  body.setAttribute("data-theme-version", "light");
+  body.setAttribute("data-layout", "vertical");
+  body.setAttribute("data-nav-headerbg", "color_9");
+  body.setAttribute("data-headerbg", "color_1");	
+  body.setAttribute("data-sidebar-style", "full");
+  body.setAttribute("data-sibebarbg", "color_9");
+  body.setAttribute("data-sidebar-position", "fixed");
+  body.setAttribute("data-header-position", "fixed");
+  body.setAttribute("data-container", "wide");
+  body.setAttribute("data-primary", "color_9");
+  body.setAttribute("direction", "ltr"); 
+}, []);
+</pre>
+					</div>
+					<div class="col-lg-7">
+						<img src="images/demo/pic4.jpg" alt="" class="w-100 demo-img">
+					</div>
+				
+				</div>
+				</div>
+				<div id="themeSet5" class="tab-pane fade">
+				  <div class="row demo-row">
+					<div class="col-lg-5">
+				<pre class="brush: javascript; h-100">
+
+useEffect(() =&gt; {
+  const body = document.querySelector("body");
+  body.setAttribute("data-typography", "poppins");
+  body.setAttribute("data-theme-version", "light");
+  body.setAttribute("data-layout", "vertical");
+  body.setAttribute("data-nav-headerbg", "color_4");
+  body.setAttribute("data-headerbg", "color_1");
+  body.setAttribute("data-sidebar-style", "mini");
+  body.setAttribute("data-sibebarbg", "color_4");
+  body.setAttribute("data-sidebar-position", "fixed");
+  body.setAttribute("data-header-position", "fixed");
+  body.setAttribute("data-container", "wide");
+  body.setAttribute("data-primary", "color_4");
+  body.setAttribute("direction", "ltr"); 
+}, []);
+</pre>
+					</div>
+						<div class="col-lg-7">
+							<img src="images/demo/pic5.jpg" alt="" class="w-100 demo-img">
+						</div>
+					</div>
+				</div>
+				<div id="themeSet6" class="tab-pane fade">
+				  <div class="row demo-row">
+					<div class="col-lg-5">
+				<pre class="brush: javascript; h-100">
+useEffect(() =&gt; {
+  const body = document.querySelector("body");
+  body.setAttribute("data-typography", "poppins");
+  body.setAttribute("data-theme-version", "light");
+  body.setAttribute("data-layout", "vertical");
+  body.setAttribute("data-nav-headerbg", "color_9");
+  body.setAttribute("data-headerbg", "color_1");
+  body.setAttribute("data-sidebar-style", "full");
+  body.setAttribute("data-sibebarbg", "color_9");
+  body.setAttribute("data-sidebar-position", "fixed");
+  body.setAttribute("data-header-position", "fixed");
+  body.setAttribute("data-container", "wide");
+  body.setAttribute("data-primary", "color_9");
+  body.setAttribute("direction", "ltr"); 
+}, []);
+</pre>
+					</div>
+						<div class="col-lg-7">
+							<img src="images/demo/pic6.jpg" alt="" class="w-100 demo-img">
+						</div>
+					</div>
+				</div>
+				<div id="themeSet7" class="tab-pane fade">
+				  <div class="row demo-row">
+					<div class="col-lg-5">
+				<pre class="brush: javascript; h-100">
+useEffect(() =&gt; {
+  const body = document.querySelector("body");
+  body.setAttribute("data-typography", "poppins");
+  body.setAttribute("data-theme-version", "light");
+  body.setAttribute("data-layout", "vertical");
+  body.setAttribute("data-nav-headerbg", "color_7");
+  body.setAttribute("data-headerbg", "color_10");
+  body.setAttribute("data-sidebar-style", "full");
+  body.setAttribute("data-sibebarbg", "color_1");
+  body.setAttribute("data-sidebar-position", "fixed");
+  body.setAttribute("data-header-position", "fixed");
+  body.setAttribute("data-container", "wide");
+  body.setAttribute("data-primary", "color_7");
+  body.setAttribute("direction", "ltr"); 
+}, []);
+</pre>
+					</div>
+						<div class="col-lg-7">
+							<img src="images/demo/pic7.jpg" alt="" class="w-100 demo-img">
+						</div>
+					</div>
+				</div>
+				<div id="themeSet8" class="tab-pane fade">
+					<div class="row demo-row">
+					  <div class="col-lg-5">
+				  <pre class="brush: javascript; h-100">
+  useEffect(() =&gt; {
+	const body = document.querySelector("body");
+	body.setAttribute("data-typography", "poppins");
+	body.setAttribute("data-theme-version", "light");
+	body.setAttribute("data-layout", "vertical");
+	body.setAttribute("data-nav-headerbg", "color_3");
+	body.setAttribute("data-headerbg", "color_3");
+	body.setAttribute("data-sidebar-style", "full");
+	body.setAttribute("data-sibebarbg", "color_1");
+	body.setAttribute("data-sidebar-position", "fixed");
+	body.setAttribute("data-header-position", "fixed");
+	body.setAttribute("data-container", "wide");
+	body.setAttribute("data-primary", "color_1");
+	body.setAttribute("direction", "ltr"); 
+  }, []);
+  </pre>
+					  </div>
+						  <div class="col-lg-7">
+							  <img src="images/demo/pic9.jpg" alt="" class="w-100 demo-img">
+						  </div>
+					  </div>
+				  </div>
+				
+			</div>
+	</div>	
+		</section>
+		
+		<hr/>
+		<section class="app-brief" id="plugins">
+			<div class="container left-align">
+				<div class="section-header">
+					<h2 class="dark-text">Credits - </h2>
+				</div>
+				<ul class="list-files">
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p> React Redux</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://redux.js.org/" class="text-warning" >Click to See</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Google fonts are used in the template.</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://fonts.google.com/specimen/Krub" class="text-warning">Krub</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Font Awesome</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://fontawesome.com/v4.7.0/" class="text-warning" >Click to See</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>All Images are used</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://www.pexels.com/" class="text-warning" >Pexels.com</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Bootstrap framework</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://react-bootstrap.github.io/" class="text-warning" >Bootstrap</a></p>
+							</div>
+						</div>
+					</li>
+					
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Datatables</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://react-bootstrap.github.io/components/table/" class="text-warning">Click to See</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>React Table</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://www.npmjs.com/package/react-table" class="text-warning">Click to See</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Full Calendar</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://fullcalendar.io/docs/react/" class="text-warning">Calendar</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Sparkline</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://borisyankov.github.io/react-sparklines/" class="text-warning">Click to See</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Chartjs</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://www.npmjs.com/package/chartjs-react" class="text-warning">Click to See</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Apexchart</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://apexcharts.com/react-chart-demos/" class="text-warning">Click to See</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Sweet Alert</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://www.npmjs.com/package/sweetalert-react" class="text-warning" >Click to See</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Simple React Lightbox</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://www.npmjs.com/package/simple-react-lightbox" class="text-warning">Click to See</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>CkEditor</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://ckeditor.com/docs/ckeditor5/latest/index.html" class="text-warning">Click to See</a></p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Uc Select2</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://www.npmjs.com/package/react-select2" class="text-warning">Click to See</a></p>
+							</div>
+						</div>
+					</li>
+					
+					<li>
+						<div class="row">
+							<div class="col-xs-4">
+								<p>Router</p>
+							</div>
+							<div class="col-xs-8">
+								<p><a href="https://www.npmjs.com/package/react-router-dom" target="_blank" class="text-warning">Click to See</a></p>
+							</div>
+						</div>
+					</li>					
+				</ul>
+			</div>
+		</section>	
+		<hr/>
+		<section class="app-brief" id="main">	
+			<div class="container left-align">
+				<div class="section-header">
+					<h2 class="dark-text">Project Main Features - </h2>
+				</div>								
+				<div class="row">
+					<div class="col-lg-12">
+						<ul class="features-list">
+							<li><strong ><a href="https://redux.js.org/" target="_blank"> Redux</a></strong></li>
+							<li><strong><a href="https://getbootstrap.com/" target="_blank"> Bootstrap</a></strong></li>
+							<li>Built in<strong><a href="https://sass-lang.com/" target="_blank"> SASS</a></strong></li>
+							<li>Fully Responsive</li>
+							<li>Ready to used widget</li>
+							<li>Detailed Documentation</li>
+							<li>Attractive Calendar</li>							
+							<li>Invoice</li>
+							<li>User Profile</li>							
+							<li>Timeline</li>
+							<li>CkEditor</li>
+							<li>Form Examples</li>
+							<li>Many Charts Options</li>
+							<li>Form Validation</li>
+							<li>Input Slider</li>
+							<li>Advanced Form Elements</li>
+							<li>Form Wizard</li>
+							<li>Social</li>
+							<li>Bootstrap</li>
+							<li>Datatable</li>	
+							<li>Table Sorting</li>
+							<li>React Table</li>
+							<li>Date Picker</li>
+							<li>Sweetalert</li>
+							<li>Toaster</li>							
+							<li>Lightbox</li>
+							<li>Scroll</li>							
+							<li>Router</li>
+						</ul>
+					</div>							
+				</div>	
+			</div>			
+		</section>
+		<hr/>
+		<section class="app-brief" id="main-content">
+			<div class="container left-align">
+				<h3>Index.js Structure</h3>
+<pre class="prettyprint lang-html linenums">
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {store} from './store/store';
+import  ThemeContext  from "./context/ThemeContext"; 
+
+ReactDOM.render(
+   &lt;React.StrictMode&gt;
+	&lt;Provider store = {store}&gt;            
+	 &lt;BrowserRouter basename='/react/demo'&gt;
+	  &lt;ThemeContext&gt;
+	   &lt;App/&gt;
+	  &lt;/ThemeContext&gt; 
+	 &lt;/BrowserRouter&gt;            
+    &lt;/Provider&gt;	
+   &lt;/React.StrictMode&gt;,
+  document.getElementById("root")
+);
+reportWebVitals();
+</pre>	
+			</div>
+		</section>	
+		<hr/>
+		<section class="app-brief" id="create-page">
+			<div class="container left-align">
+				<h3>Create a Page</h3>
+				<pre class="prettyprint lang-html linenums">
+import React from "react";
+
+export function MyPage() {
+  return(
+   &lt;h1&gt;Hello!&lt;/h1&gt;
+  ) 
+} 							
+					</pre>	
+			</div>
+		</section>	
+		<hr/>		
+				
+		<!-- Our Products -->
+		<section class="app-brief" id="our_product">
+			<div class="container left-align">
+				<div class="section-header">
+					<h2 class="dark-text">Our Products - </h2>
+				</div>
+				<div class="row other-theme">
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/ZdXYkz">
+								<img src="images/product/samar.png"  alt=""/>
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/ZdXYkz">
+										Samar | Creative Agency React NextJs Template
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/KeX1Rn">
+								<img src="images/product/lezato.png"  alt="" />
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/KeX1Rn">
+										Lezato : React Redux Restaurant Admin Template
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/DV3OMG">
+								<img src="images/product/boltz.png"  alt=""/>
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/DV3OMG">
+										Boltz - React Crypto Admin and Dashboard Template
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+										
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/YE2xP">
+								<img src="images/product/jobboard.png"  alt=""/>
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/YE2xP">
+										Job Board - Job Board React Template
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/QOz1kM">
+								<img src="images/product/zenix.png"  alt=""/>
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/QOz1kM">
+										Zenix - React Redux Crypto Admin Dashboard
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/Ke2MvA">
+								<img src="images/product/mophy.png"  alt=""/>
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/Ke2MvA">
+										MOPHY - Payment React Redux Admin Dashboard 
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/QO6bbY">
+								<img src="images/product/karciz.png"  alt=""/>
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/QO6bbY">
+										Karciz - React Redux Ticketing Admin Dashboard
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/9WAjVQ">
+								<img src="images/product/kingarchitect.png"  alt=""/>
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/9WAjVQ">
+										KingArchitect | Property Portfolio & Real Estate React Template - No JQuery
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/Aveej">
+								<img src="images/product/industry.png"  alt=""/>
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/Aveej">
+										Industry - Factory & Industrial React Template
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/RyP7L7">
+								<img src="images/product/umang.png"  alt=""/>
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/RyP7L7">
+										Umang Academy : Kindergarten, Kids Play School React Template
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/3PdonK">
+								<img src="images/product/uena.png"  alt=""/>
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/3PdonK">
+										Uena - React Saas Admin Dashboard Template
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>					
+					
+					<div class="col-md-4 col-sm-6 m-b30">
+						<div class="product-port-bx">
+							<a target="_blank" href="https://1.envato.market/Q5MyA">
+								<img src="images/product/metroadmin.png"  alt=""/>
+							</a>
+							<div class="product-info">
+								<h4 class="title">
+									<a target="_blank" href="https://1.envato.market/Q5MyA">
+										MetroAdmin - Bootstrap, Laravel & React Admin Dashboard
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+		
+		<!-- Need Help -->
+		<section class="app-brief" id="custom_work" style="background-image: url(images/bg1.png); background-position: left center;">
+			<div class="container left-align">
+				<div class="col-md-12 text-center custom-info">
+					<h2 class="m-t0">Do You Need Help To Customization</h2>
+					<h3 class="text-primary">After Purchase A Template...</h3>
+					<h4>You Will Start Customizing According Your Requirement<br/> <span class="text-primary">BUT</span> What If You Don't Know</h4>
+					<h3 class="text-black">SOLUTION IS <span class="text-primary"><u>HIRE DexignLabs</u></span></h3>
+					<div class="hire">
+						<h4><span class="text-black">Hire Same Team For </span> <span class="text-primary">Quality Customization</span></h4>
+						<ul>
+							<li>We Will Customize Template According To Your Requirement</li>
+							<li>We Will Upload On Server And Make Sure Your Website is Live</li>
+						</ul>
+						<div class="gmail-box">
+							<a href="skype:rahulxarma?chat" class="gmail"><i class="fa fa-skype"></i>rahulxarma</a>
+							<a target="_blank" href="mailto:dexignlabs@Gmail.Com" class="gmail"><i class="fa fa-envelope"></i> Dexignlabs@Gmail.Com</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<!-- Change Log -->
+		<section class="app-brief change-log" id="version_history">
+			<div class="container left-align">
+				<div class="section-header">
+					<h2 class="dark-text">Version History - <small class="topbutton">
+						<!-- <a href="#tableofcontent">#back to top</a> -->
+					</small>
+					</h2>
+				</div>
+				
+				<h3> 18 December 2022 </h3> 
+				<ul>
+					<li>New - Created & Upload Finlab </li>
+				</ul>
+			</div>
+		</section>
+			
+		<!-- Footer -->
+		<footer class="app-brief grey-bg">
+			<div class="container">
+				<p class="copyright">
+					© 2022 dexignLabs , All Rights Reserved
+				</p>
+			</div>
+		</footer>
+	
+	</div>
+</div>
+	
+<!-- JavaScript -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/smoothscroll.js"></script>
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/jquery.localScroll.min.js"></script>
+<script src="js/load.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/scrollbar.min.js"></script>
+<script src="plugins/jstree/dist/jstree.min.js"></script>
+<script>
+// prettyPhoto
+jQuery(document).ready(function(){
+	jQuery('.dzClickload').click(function(){
+		jQuery('.dzClickload').removeClass('active');
+		jQuery(this).addClass('active');
+	});
+	
+	jQuery(".content-scroll").mCustomScrollbar({
+		setWidth:false,
+		setHeight:false,
+		axis:"y"
+	});	
+		
+	$(".full-height").css("height", $(window).height());
+	
+	$("#dz_tree").jstree({
+		"core": {
+			"themes": {
+				"responsive": false
+			}
+		},
+		"types": {
+			"default": {
+				"icon": "fa fa-folder"
+			},
+			"file": {
+				"icon": "fa fa-file-text"
+			}
+		},
+		"plugins": ["types"]
+	});
+});
+</script>
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $(".navbar-nav a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      });
+    } // End if
+  });
+});
+</script>
+</body>
+</html>

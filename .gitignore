@@ -1,0 +1,56 @@
+# Node.js dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE configs
+.vscode/
+.idea/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Misc
+coverage/
+*.log
+
+# Mac system files
+.AppleDouble
+.LSOverride
+
+# SASS cache
+.sass-cache/
+
+# Others
+package-lock.json
+yarn.lock
+
+# Optional: ignore test coverage and reports
+coverage/
+
+# Optional: ignore public build artifacts
+public/*.map
+
+# Optional: ignore generated files
+documentation/css/*.map
+src/css/*.map
+
+# Optional: ignore temporary files
+*.tmp
+*.swp
+/.gemini
