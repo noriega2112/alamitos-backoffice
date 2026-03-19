@@ -144,7 +144,7 @@ serve(async (req) => {
       p_total_amount: calculatedTotal,
       p_payment_proof_url: payment_proof_url,
       p_notes: notes ?? '',
-      p_items: JSON.stringify(validatedItems),
+      p_items: validatedItems,
     });
 
     if (orderError) throw new Error(`Error creando orden: ${orderError.message}`);
