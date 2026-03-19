@@ -25,6 +25,7 @@ import Notification from './components/Dashboard/Notification';
 import Bill from './components/Dashboard/Bill';
 import HomeSetting from './components/Dashboard/Setting';
 import CheckoutPage from './pages/CheckoutPage';
+import OrderStatusPage from './pages/OrderStatusPage';
 
 //Restaurant
 import Restaurant from './components/Dashboard/Restaurant/Restaurant';
@@ -237,6 +238,7 @@ const Markup = () => {
           {allroutes.map((data, i) => (
             <Route key={i} exact path={`${data.url}`} element={data.component} />
           ))}
+          <Route path="status/:orderId" element={<OrderStatusPage />} />
         </Route>
       </Routes>
       <ScrollToTop />
