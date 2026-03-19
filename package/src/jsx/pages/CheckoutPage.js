@@ -309,8 +309,8 @@ const CheckoutPage = () => {
                 <button type="submit" className="btn btn-primary w-100 mt-3" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <>
-                      <span className="spinner-border spinner-border-sm me-2" aria-hidden="true" />
-                      Procesando...
+                      <span className="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                      {' '}Procesando...
                     </>
                   ) : (
                     '🛍️ Realizar Pedido'
