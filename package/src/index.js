@@ -4,20 +4,32 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import {Provider} from 'react-redux';
-import {store} from './store/store';
-import  ThemeContext  from "./context/ThemeContext"; 
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+import ThemeContext from './context/ThemeContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,
+      retry: 2,
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store = {store}>
-      <BrowserRouter basename='/react/demo'>
-        <ThemeContext>
-          <App />
-        </ThemeContext>
-      </BrowserRouter>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <BrowserRouter basename="/">
+          <ThemeContext>
+            <App />
+          </ThemeContext>
+        </BrowserRouter>
+      </Provider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
