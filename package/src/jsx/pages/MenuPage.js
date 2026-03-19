@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useProducts, usePromotions } from '../../queries/useCatalog';
-import { selectActiveOrderId } from '../../store/slices/orderSlice';
+import { selectActiveOrderId, clearActiveOrder } from '../../store/slices/orderSlice';
 import { selectCartCount } from '../../store/slices/cartSlice';
 import AddToCartModal from '../components/Menu/AddToCartModal';
 import { supabase } from '../../supabaseClient';
 
 const MenuPage = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const activeOrderId = useSelector(selectActiveOrderId);
   const { data: products = [], isLoading: productsLoading } = useProducts();
@@ -27,10 +28,12 @@ const MenuPage = () => {
         .single();
       if (order && !['delivered', 'rejected'].includes(order.status)) {
         navigate(`/status/${activeOrderId}`);
+      } else {
+        dispatch(clearActiveOrder());
       }
     };
     checkOrder();
-  }, [activeOrderId, navigate]);
+  }, [activeOrderId, navigate, dispatch]);
 
   const openModal = (item, type) => {
     setModalItem(item);

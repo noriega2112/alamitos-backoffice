@@ -51,18 +51,19 @@ serve(async (req) => {
       unit_price: number;
       notes: string;
       drinks: number[];
+      name: string;
     }> = [];
 
     for (const item of items) {
       const id = item.product_id ?? item.promotion_id;
 
-      let record: { price: number; sale_price?: number } | null = null;
+      let record: { price: number; sale_price?: number; name: string } | null = null;
       let fetchError: unknown = null;
 
       if (item.product_id) {
         const { data, error } = await supabase
           .from('products')
-          .select('price, sale_price')
+          .select('price, sale_price, name')
           .eq('id', id)
           .eq('is_active', true)
           .single();
@@ -72,7 +73,7 @@ serve(async (req) => {
         const now = new Date().toISOString();
         const { data, error } = await supabase
           .from('promotions')
-          .select('price, sale_price')
+          .select('price, sale_price, name')
           .eq('id', id)
           .eq('is_active', true)
           .lte('start_date', now)
@@ -106,6 +107,7 @@ serve(async (req) => {
         unit_price: effectivePrice,
         notes: item.notes ?? '',
         drinks: item.drinks ?? [],
+        name: record.name,
       });
     }
 
@@ -160,8 +162,8 @@ serve(async (req) => {
           ? `📍 Zona ID: ${zone_id}\n🏠 Dirección: ${specific_address}`
           : `🏪 PARA RECOGER EN LOCAL`;
 
-        const itemsSummary = items.map((item: { product_id: number | null; promotion_id: number | null; quantity: number; drinks?: number[]; notes?: string }) => {
-          const label = item.product_id ? `Producto #${item.product_id}` : `Promo #${item.promotion_id}`;
+        const itemsSummary = validatedItems.map((item) => {
+          const label = item.name;
           const drinks = item.drinks?.length ? ` + bebidas: [${item.drinks.join(', ')}]` : '';
           const note = item.notes ? ` (${item.notes})` : '';
           return `• x${item.quantity} ${label}${drinks}${note}`;

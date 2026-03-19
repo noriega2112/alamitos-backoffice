@@ -1,6 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-
-let nextId = 1;
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -8,7 +6,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       // action.payload: { type: 'product'|'promotion', itemId, itemData, quantity, drinks, notes }
-      const item = { ...action.payload, id: String(nextId++) };
+      const item = { ...action.payload, id: nanoid() };
       state.items.push(item);
     },
     removeFromCart: (state, action) => {
