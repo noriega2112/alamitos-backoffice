@@ -24,7 +24,7 @@ import OrderHistory from './components/Dashboard/OrderHistory';
 import Notification from './components/Dashboard/Notification';
 import Bill from './components/Dashboard/Bill';
 import HomeSetting from './components/Dashboard/Setting';
-import CheckoutPage from './components/Dashboard/CheckoutPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 //Restaurant
 import Restaurant from './components/Dashboard/Restaurant/Restaurant';
