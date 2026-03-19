@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../../store/slices/cartSlice';
-import { useDrinks } from '../../../../queries/useCatalog';
+import { addToCart } from '../../../store/slices/cartSlice';
+import { useDrinks } from '../../../queries/useCatalog';
 
 const AddToCartModal = ({ show, onHide, item, type }) => {
   // item: product or promotion object
