@@ -100,6 +100,7 @@ import Widget from './pages/Widget';
 
 // Menu
 import MenuPage from './pages/MenuPage';
+import CartPage from './pages/CartPage';
 
 /// Table
 import SortingTable from './components/table/SortingTable/SortingTable';
@@ -137,6 +138,7 @@ const Markup = () => {
     { url: 'bill', component: <Bill /> },
     { url: 'setting', component: <HomeSetting /> },
     { url: 'checkout', component: <CheckoutPage /> },
+    { url: 'cart', component: <CartPage /> },
 
     // Restaurant
     { url: 'restaurant', component: <Restaurant /> },
