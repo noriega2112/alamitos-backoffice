@@ -45,7 +45,7 @@ BEGIN
       LOOP
         INSERT INTO order_item_drinks (order_item_id, drink_id, drink_price)
         SELECT v_order_item_id, d.id, d.price
-        FROM drinks d WHERE d.id = v_drink_id;
+        FROM drinks d WHERE d.id = v_drink_id AND d.is_active = true;
       END LOOP;
     END IF;
   END LOOP;
