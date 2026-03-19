@@ -44,19 +44,49 @@ serve(async (req) => {
 
     // 3. Re-validate prices from DB (never trust frontend)
     let calculatedSubtotal = 0;
+    const validatedItems: Array<{
+      product_id: number | null;
+      promotion_id: number | null;
+      quantity: number;
+      unit_price: number;
+      notes: string;
+      drinks: number[];
+    }> = [];
+
     for (const item of items) {
-      const table = item.product_id ? 'products' : 'promotions';
       const id = item.product_id ?? item.promotion_id;
-      const { data: record, error } = await supabase
-        .from(table)
-        .select('price, sale_price')
-        .eq('id', id)
-        .single();
-      if (error || !record) throw new Error(`Ítem no encontrado: ${id}`);
+
+      let record: { price: number; sale_price?: number } | null = null;
+      let fetchError: unknown = null;
+
+      if (item.product_id) {
+        const { data, error } = await supabase
+          .from('products')
+          .select('price, sale_price')
+          .eq('id', id)
+          .eq('is_active', true)
+          .single();
+        record = data;
+        fetchError = error;
+      } else {
+        const now = new Date().toISOString();
+        const { data, error } = await supabase
+          .from('promotions')
+          .select('price, sale_price')
+          .eq('id', id)
+          .eq('is_active', true)
+          .lte('start_date', now)
+          .gte('end_date', now)
+          .single();
+        record = data;
+        fetchError = error;
+      }
+
+      if (fetchError || !record) throw new Error(`Ítem no encontrado o no disponible: ${id}`);
       const effectivePrice = record.sale_price || record.price;
       calculatedSubtotal += effectivePrice * item.quantity;
 
-      // Add drinks to subtotal
+      // Add drinks to subtotal (once per item, accumulate per-unit cost)
       if (item.drinks?.length) {
         for (const drinkId of item.drinks) {
           const { data: drink } = await supabase
@@ -65,9 +95,18 @@ serve(async (req) => {
             .eq('id', drinkId)
             .eq('is_active', true)
             .single();
-          if (drink) calculatedSubtotal += drink.price * item.quantity;
+          if (drink) calculatedSubtotal += Number(drink.price) * item.quantity;
         }
       }
+
+      validatedItems.push({
+        product_id: item.product_id ?? null,
+        promotion_id: item.promotion_id ?? null,
+        quantity: item.quantity,
+        unit_price: effectivePrice,
+        notes: item.notes ?? '',
+        drinks: item.drinks ?? [],
+      });
     }
 
     // 4. Validate delivery fee from DB
@@ -103,7 +142,7 @@ serve(async (req) => {
       p_total_amount: calculatedTotal,
       p_payment_proof_url: payment_proof_url,
       p_notes: notes ?? '',
-      p_items: JSON.stringify(items),
+      p_items: JSON.stringify(validatedItems),
     });
 
     if (orderError) throw new Error(`Error creando orden: ${orderError.message}`);
