@@ -33,11 +33,7 @@ const MenuPage = () => {
   useEffect(() => {
     if (!activeOrderId) return;
     const checkOrder = async () => {
-      const { data: order } = await supabase
-        .from('orders')
-        .select('id, status')
-        .eq('id', activeOrderId)
-        .single();
+      const { data: order } = await supabase.from('orders').select('id, status').eq('id', activeOrderId).single();
       if (order && !['delivered', 'rejected'].includes(order.status)) {
         navigate(`/status/${activeOrderId}`);
       } else {
@@ -80,7 +76,7 @@ const MenuPage = () => {
           setActiveCategory(Number(best[0]));
         }
       },
-      { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] }
+      { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] },
     );
 
     groupedCategories.forEach(({ id }) => {
@@ -147,7 +143,7 @@ const MenuPage = () => {
     <div>
       {/* Promotions Carousel */}
       {promotions.length > 0 && (
-        <section className="mb-4">
+        <section>
           <h3 className="mb-3">🔥 Promociones</h3>
           <div className="position-relative">
             <div className="swiper-pagination-banner"></div>
@@ -170,7 +166,12 @@ const MenuPage = () => {
                       <img
                         src={promo.image_url}
                         alt={promo.name}
-                        style={{ width: '100%', height: 220, objectFit: 'cover', borderRadius: 'var(--bs-border-radius)' }}
+                        style={{
+                          width: '100%',
+                          height: 220,
+                          objectFit: 'cover',
+                          borderRadius: 'var(--bs-border-radius)',
+                        }}
                       />
                     ) : (
                       <div
@@ -199,62 +200,65 @@ const MenuPage = () => {
       {/* Categories Nav (fixed via scroll listener — position:sticky broken by overflow:hidden on #main-wrapper) */}
       {groupedCategories.length > 0 && (
         <div ref={navPlaceholderRef} style={{ marginBottom: '1rem', height: navFixed ? 72 : 'auto' }}>
-        <div
-          className="bg-white py-2"
-          style={navFixed ? {
-            position: 'fixed',
-            top: HEADER_H,
-            left: navPos.left,
-            right: navPos.right,
-            zIndex: 10,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-          } : {
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-          }}
-        >
-          <Swiper
-            className="mySwiper-2"
-            slidesPerView={5}
-            spaceBetween={20}
-            modules={[]}
-            onSwiper={(swiper) => { swiperRef.current = swiper; }}
-            breakpoints={{
-              360: { slidesPerView: 2, spaceBetween: 20 },
-              600: { slidesPerView: 3, spaceBetween: 20 },
-              768: { slidesPerView: 4, spaceBetween: 20 },
-              1200: { slidesPerView: 3, spaceBetween: 20 },
-              1920: { slidesPerView: 5, spaceBetween: 20 },
-            }}
+          <div
+            className="bg-white py-2 px-3"
+            style={
+              navFixed
+                ? {
+                    position: 'fixed',
+                    top: HEADER_H,
+                    left: navPos.left,
+                    right: navPos.right,
+                    zIndex: 10,
+                    // boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                  }
+                : {
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                  }
+            }
           >
-            {groupedCategories.map((cat) => (
-              <SwiperSlide key={cat.id}>
-                <div
-                  className="cate-bx text-center"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => scrollToCategory(cat.id)}
-                >
+            <Swiper
+              className="mySwiper-2"
+              slidesPerView={5}
+              spaceBetween={20}
+              modules={[]}
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              breakpoints={{
+                360: { slidesPerView: 2, spaceBetween: 20 },
+                600: { slidesPerView: 3, spaceBetween: 20 },
+                768: { slidesPerView: 4, spaceBetween: 20 },
+                1200: { slidesPerView: 3, spaceBetween: 20 },
+                1920: { slidesPerView: 5, spaceBetween: 20 },
+              }}
+            >
+              {groupedCategories.map((cat) => (
+                <SwiperSlide key={cat.id}>
                   <div
-                    className="card"
-                    style={
-                      activeCategory === cat.id
-                        ? { borderColor: 'var(--primary)', background: 'var(--primary)', color: '#fff' }
-                        : {}
-                    }
+                    className="cate-bx text-center"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => scrollToCategory(cat.id)}
                   >
-                    <div className="card-body py-2">
-                      <h6
-                        className="mb-0 font-w500"
-                        style={activeCategory === cat.id ? { color: '#fff' } : {}}
-                      >
-                        {cat.name}
-                      </h6>
+                    <div
+                      className="card"
+                      style={
+                        activeCategory === cat.id
+                          ? { borderColor: 'var(--primary)', background: 'var(--primary)', color: '#fff' }
+                          : {}
+                      }
+                    >
+                      <div className="card-body py-2">
+                        <h6 className="mb-0 font-w500" style={activeCategory === cat.id ? { color: '#fff' } : {}}>
+                          {cat.name}
+                        </h6>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       )}
 
@@ -262,14 +266,16 @@ const MenuPage = () => {
       {groupedCategories.map((cat) => (
         <section
           key={cat.id}
-          ref={(el) => { sectionRefs.current[cat.id] = el; }}
+          ref={(el) => {
+            sectionRefs.current[cat.id] = el;
+          }}
           data-cat-id={cat.id}
           className="mb-5"
         >
           <h4 className="mb-3">{cat.name}</h4>
           <div className="row g-3">
             {cat.products.map((product) => (
-              <div key={product.id} className="col-12 col-sm-6 col-md-4">
+              <div key={product.id} className="col-6 col-md-4">
                 <div className="card h-100 shadow-sm">
                   {product.image_url && (
                     <img
@@ -285,9 +291,7 @@ const MenuPage = () => {
                     <div className="mb-0">
                       {product.sale_price ? (
                         <>
-                          <span className="text-muted text-decoration-line-through me-2 small">
-                            L. {product.price}
-                          </span>
+                          <span className="text-muted text-decoration-line-through me-2 small">L. {product.price}</span>
                           <span className="fw-bold text-primary fs-5">L. {product.sale_price}</span>
                         </>
                       ) : (
@@ -296,10 +300,7 @@ const MenuPage = () => {
                     </div>
                   </div>
                   <div className="card-footer bg-transparent border-0 pb-3">
-                    <button
-                      className="btn btn-primary w-100"
-                      onClick={() => openModal(product, 'product')}
-                    >
+                    <button className="btn btn-primary w-100" onClick={() => openModal(product, 'product')}>
                       Agregar +
                     </button>
                   </div>
@@ -314,12 +315,7 @@ const MenuPage = () => {
       <CartFAB />
 
       {/* Modal */}
-      <AddToCartModal
-        show={!!modalItem}
-        onHide={() => setModalItem(null)}
-        item={modalItem}
-        type={modalType}
-      />
+      <AddToCartModal show={!!modalItem} onHide={() => setModalItem(null)} item={modalItem} type={modalType} />
     </div>
   );
 };
@@ -331,13 +327,30 @@ const CartFAB = () => {
   return (
     <button
       className="btn btn-primary rounded-circle position-fixed d-flex align-items-center justify-content-center"
-      style={{ bottom: 24, right: 24, width: 64, height: 64, fontSize: 18, zIndex: 1000, boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}
+      style={{
+        bottom: 24,
+        right: 24,
+        width: 64,
+        height: 64,
+        fontSize: 18,
+        zIndex: 1000,
+        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+      }}
       onClick={() => navigate('/cart')}
     >
       🛒
       <span
         className="badge bg-danger rounded-circle position-absolute"
-        style={{ top: -4, right: -4, fontSize: 11, minWidth: 22, height: 22, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        style={{
+          top: -4,
+          right: -4,
+          fontSize: 11,
+          minWidth: 22,
+          height: 22,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
       >
         {cartCount}
       </span>
