@@ -22,7 +22,7 @@ const JobieNav = ({ title, onClick: ClickToAddEvent, onClick2, onClick3 }) => {
         onBox={() => onClick('box')}
         onClick={() => ClickToAddEvent()}
       />
-      <SideBar />
+      {/* <SideBar /> */}
     </Fragment>
   );
 };

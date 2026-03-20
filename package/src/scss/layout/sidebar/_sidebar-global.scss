@@ -2,11 +2,7 @@
 // Nav Profile
 ///////////////////////////
 :root{
-	--space-right: 18.75rem;
-	
-	[data-layout="horizontal"][data-sidebar-style="full"][data-container="wide"]{
-		--space-right: 3.75rem;
-	}
+	--space-right: 0rem;
 }
 
 .nav-label {
@@ -44,18 +40,8 @@
 }
 
 .content-body {
-    margin-left: var(--space-right);
+    margin-left: 0;
     z-index: 0;
-    transition: all .2s ease;
-    @include respond('laptop') {
-        margin-left: 19rem;
-    }
-	@include respond ('tab-land'){
-		margin-left:17rem;
-	}
-	@include respond ('phone-land'){
-		margin-left:0;
-	}
 }
 // Bell //
 .bell img{
