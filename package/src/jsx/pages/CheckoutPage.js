@@ -135,119 +135,116 @@ const CheckoutPage = () => {
             {/* Delivery Type */}
             <div className="card mb-3 shadow-sm">
               <div className="card-body">
-                <h5 className="card-title">Tipo de entrega</h5>
-                <div className="form-check mb-2">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    id="delivery"
-                    value="delivery"
-                    checked={deliveryType === 'delivery'}
-                    onChange={(e) => setDeliveryType(e.target.value)}
-                  />
-                  <label className="form-check-label" htmlFor="delivery">
-                    🚚 Entrega a domicilio
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    id="pickup"
-                    value="pickup"
-                    checked={deliveryType === 'pickup'}
-                    onChange={(e) => setDeliveryType(e.target.value)}
-                  />
-                  <label className="form-check-label" htmlFor="pickup">
-                    🏪 Pasar recogiendo
-                  </label>
+                <div className="card-body">
+                  <h5 className="card-title">Tipo de entrega</h5>
+                  <div className="form-check mb-2">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      id="delivery"
+                      value="delivery"
+                      checked={deliveryType === 'delivery'}
+                      onChange={(e) => setDeliveryType(e.target.value)}
+                    />
+                    <label className="form-check-label" htmlFor="delivery">
+                      🚚 Entrega a domicilio
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      id="pickup"
+                      value="pickup"
+                      checked={deliveryType === 'pickup'}
+                      onChange={(e) => setDeliveryType(e.target.value)}
+                    />
+                    <label className="form-check-label" htmlFor="pickup">
+                      🏪 Pasar recogiendo
+                    </label>
+                  </div>
                 </div>
 
                 {/* Customer Info */}
-                <h5 className="card-title">Tus datos</h5>
-                <div className="mb-3">
-                  <label className="form-label" htmlFor="customerName">
-                    Nombre completo *
-                  </label>
-                  <input
-                    id="customerName"
-                    type="text"
-                    className="form-control"
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder="Juan Pérez"
-                  />
-                </div>
-                <div className="mb-0">
-                  <label className="form-label" htmlFor="phoneNumber">
-                    Teléfono (8 dígitos) *
-                  </label>
-                  <input
-                    id="phoneNumber"
-                    type="tel"
-                    className="form-control"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    placeholder="9999-9999"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Delivery Info */}
-            {deliveryType === 'delivery' && (
-              <div className="card mb-3 shadow-sm">
                 <div className="card-body">
-                  <h5 className="card-title">Dirección de entrega</h5>
+                  <h5 className="card-title">Tus datos</h5>
                   <div className="mb-3">
-                    <label className="form-label" htmlFor="zone">
-                      Zona *
+                    <label className="form-label" htmlFor="customerName">
+                      Nombre completo *
                     </label>
-                    <select
-                      id="zone"
-                      className="form-select"
-                      value={selectedZoneId}
-                      onChange={(e) => setSelectedZoneId(e.target.value)}
-                    >
-                      <option value="">Selecciona tu zona...</option>
-                      {zones.map((zone) => (
-                        <option key={zone.id} value={zone.id}>
-                          {zone.name} — L. {zone.delivery_fee} delivery
-                        </option>
-                      ))}
-                    </select>
+                    <input
+                      id="customerName"
+                      type="text"
+                      className="form-control"
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      placeholder="Juan Pérez"
+                    />
                   </div>
                   <div className="mb-0">
-                    <label className="form-label" htmlFor="address">
-                      Dirección específica *
+                    <label className="form-label" htmlFor="phoneNumber">
+                      Teléfono (8 dígitos) *
                     </label>
-                    <textarea
-                      id="address"
+                    <input
+                      id="phoneNumber"
+                      type="tel"
                       className="form-control"
-                      rows={3}
-                      value={specificAddress}
-                      onChange={(e) => setSpecificAddress(e.target.value)}
-                      placeholder="Barrio, calle, número de casa, referencia cercana..."
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      placeholder="9999-9999"
                     />
                   </div>
                 </div>
-              </div>
-            )}
-
-            {/* Notes */}
-            <div className="card mb-3 shadow-sm">
-              <div className="card-body">
-                <label className="form-label" htmlFor="notes">
-                  Notas adicionales (opcional)
-                </label>
-                <textarea
-                  id="notes"
-                  className="form-control"
-                  rows={2}
-                  value={orderNotes}
-                  onChange={(e) => setOrderNotes(e.target.value)}
-                  placeholder="Instrucciones especiales para el pedido..."
-                />
+                {/* Delivery Info */}
+                {deliveryType === 'delivery' && (
+                  <div className="card-body">
+                    <h5 className="card-title">Dirección de entrega</h5>
+                    <div className="mb-3">
+                      <label className="form-label" htmlFor="zone">
+                        Zona *
+                      </label>
+                      <select
+                        id="zone"
+                        className="form-select"
+                        value={selectedZoneId}
+                        onChange={(e) => setSelectedZoneId(e.target.value)}
+                      >
+                        <option value="">Selecciona tu zona...</option>
+                        {zones.map((zone) => (
+                          <option key={zone.id} value={zone.id}>
+                            {zone.name} — L. {zone.delivery_fee} delivery
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="mb-0">
+                      <label className="form-label" htmlFor="address">
+                        Dirección específica *
+                      </label>
+                      <textarea
+                        id="address"
+                        className="form-control"
+                        rows={3}
+                        value={specificAddress}
+                        onChange={(e) => setSpecificAddress(e.target.value)}
+                        placeholder="Barrio, calle, número de casa, referencia cercana..."
+                      />
+                    </div>
+                  </div>
+                )}
+                <div className="card-body">
+                  <label className="form-label" htmlFor="notes">
+                    Notas adicionales (opcional)
+                  </label>
+                  <textarea
+                    id="notes"
+                    className="form-control"
+                    rows={2}
+                    value={orderNotes}
+                    onChange={(e) => setOrderNotes(e.target.value)}
+                    placeholder="Instrucciones especiales para el pedido..."
+                  />
+                </div>
               </div>
             </div>
 
@@ -271,7 +268,7 @@ const CheckoutPage = () => {
 
           {/* Order Summary */}
           <div className="col-lg-4">
-            <div className="card shadow-sm sticky-top" style={{ top: 20 }}>
+            <div className="card shadow-sm " style={{ top: 20 }}>
               <div className="card-body">
                 <h5 className="mb-3">Tu pedido</h5>
                 {items.map((item) => (
@@ -280,7 +277,12 @@ const CheckoutPage = () => {
                       {item.itemData.name} ×{item.quantity}
                     </span>
                     <span className="text-nowrap">
-                      L. {(((item.itemData.sale_price || item.itemData.price) + (item.drinks || []).reduce((s, d) => s + d.price, 0)) * item.quantity).toFixed(2)}
+                      L.{' '}
+                      {(
+                        ((item.itemData.sale_price || item.itemData.price) +
+                          (item.drinks || []).reduce((s, d) => s + d.price, 0)) *
+                        item.quantity
+                      ).toFixed(2)}
                     </span>
                   </div>
                 ))}
@@ -309,8 +311,7 @@ const CheckoutPage = () => {
                 <button type="submit" className="btn btn-primary w-100 mt-3" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <>
-                      <span className="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
-                      {' '}Procesando...
+                      <span className="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> Procesando...
                     </>
                   ) : (
                     '🛍️ Realizar Pedido'

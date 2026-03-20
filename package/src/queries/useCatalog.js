@@ -31,6 +31,20 @@ export const usePromotions = () =>
     },
   });
 
+export const useCategories = () =>
+  useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('categories')
+        .select('*')
+        .order('name');
+      if (error) throw error;
+      return data;
+    },
+    staleTime: 10 * 60 * 1000,
+  });
+
 export const useDrinks = () =>
   useQuery({
     queryKey: ['drinks'],

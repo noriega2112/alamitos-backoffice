@@ -54,3 +54,4 @@ src/css/*.map
 *.tmp
 *.swp
 /.gemini
+package/.env

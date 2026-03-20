@@ -1,6 +1,9 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
+import { useEffect } from "react";
+import ProductListItem from "./ProductListItem";
+import { supabase } from "../../../../../supabaseClient";
 
 import PageTitle from "../../../../layouts/PageTitle";
 
@@ -15,6 +18,27 @@ import product7 from "../../../../../images/product/7.jpg";
 
 const ProductList = () => {
   const [reviewModal, setReviewModal] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const { data, error } = await supabase.from("products").select("*");
+        if (error) {
+          throw error;
+        }
+        setProducts(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
   return (
     <Fragment>
       <PageTitle activeMenu="Blank" motherMenu="Layout" />
