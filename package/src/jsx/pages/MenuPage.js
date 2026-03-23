@@ -34,7 +34,7 @@ const MenuPage = () => {
     if (!activeOrderId) return;
     const checkOrder = async () => {
       const { data: order } = await supabase.from('orders').select('id, status').eq('id', activeOrderId).single();
-      if (order && !['delivered', 'rejected'].includes(order.status)) {
+      if (order && order.status !== 'rejected') {
         navigate(`/status/${activeOrderId}`);
       } else {
         dispatch(clearActiveOrder());

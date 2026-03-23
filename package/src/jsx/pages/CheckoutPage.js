@@ -245,23 +245,20 @@ const CheckoutPage = () => {
                     placeholder="Instrucciones especiales para el pedido..."
                   />
                 </div>
-              </div>
-            </div>
-
-            {/* Payment Proof */}
-            <div className="card mb-3 shadow-sm">
-              <div className="card-body">
-                <h5 className="card-title">Comprobante de pago *</h5>
-                <p className="text-muted small mb-3">
-                  Realiza la transferencia bancaria y sube la captura de pantalla del comprobante.
-                </p>
-                <input
-                  type="file"
-                  className="form-control"
-                  accept="image/*"
-                  onChange={(e) => setPaymentFile(e.target.files[0])}
-                />
-                {paymentFile && <p className="text-success small mt-2 mb-0">✓ {paymentFile.name}</p>}
+                {/* Payment Proof */}
+                <div className="card-body">
+                  <h5 className="card-title">Comprobante de pago *</h5>
+                  <p className="text-muted small mb-3">
+                    Realiza la transferencia bancaria y sube la captura de pantalla del comprobante.
+                  </p>
+                  <input
+                    type="file"
+                    className="form-control"
+                    accept="image/*"
+                    onChange={(e) => setPaymentFile(e.target.files[0])}
+                  />
+                  {paymentFile && <p className="text-success small mt-2 mb-0">✓ {paymentFile.name}</p>}
+                </div>
               </div>
             </div>
           </div>

@@ -5,11 +5,9 @@ import { supabase } from '../../supabaseClient';
 import { clearActiveOrder } from '../../store/slices/orderSlice';
 
 const STATUS_STEPS = [
-  { key: 'pending',          label: 'Recibido',    icon: '📋' },
-  { key: 'confirmed',        label: 'Confirmado',  icon: '✅' },
-  { key: 'preparing',        label: 'Preparando',  icon: '👨‍🍳' },
-  { key: 'out_for_delivery', label: 'En Camino',   icon: '🚚' },
-  { key: 'delivered',        label: 'Entregado',   icon: '🎉' },
+  { key: 'pending',    label: 'Recibido',    icon: '📋' },
+  { key: 'confirmed',  label: 'Confirmado',  icon: '✅' },
+  { key: 'preparing',  label: 'Preparando',  icon: '👨‍🍳' },
 ];
 
 const OrderStatusPage = () => {
@@ -82,7 +80,6 @@ const OrderStatusPage = () => {
   }
 
   const isRejected = order.status === 'rejected';
-  const isDelivered = order.status === 'delivered';
   const currentStepIndex = STATUS_STEPS.findIndex(s => s.key === order.status);
 
   return (
@@ -152,18 +149,14 @@ const OrderStatusPage = () => {
                     </div>
                   </div>
 
-                  {isDelivered ? (
-                    <div className="text-center mt-3">
-                      <p className="text-success fw-bold mb-3">¡Tu pedido fue entregado! 🎉</p>
-                      <button className="btn btn-primary" onClick={handleNewOrder}>
-                        Hacer Nuevo Pedido
-                      </button>
-                    </div>
-                  ) : (
-                    <p className="text-center text-muted small mb-0">
-                      Esta página se actualiza automáticamente
-                    </p>
-                  )}
+                  <p className="text-center text-muted small mb-3">
+                    Esta página se actualiza automáticamente
+                  </p>
+                  <div className="text-center">
+                    <button className="btn btn-outline-primary" onClick={handleNewOrder}>
+                      Hacer Nuevo Pedido
+                    </button>
+                  </div>
                 </>
               )}
             </div>
