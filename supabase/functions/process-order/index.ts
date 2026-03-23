@@ -15,15 +15,22 @@ serve(async (req) => {
   }
 
   try {
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-    );
+    const supabase = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
 
     const payload = await req.json();
     const {
-      customer_name, phone_number, delivery_type, zone_id, specific_address,
-      notes, payment_proof_url, items, subtotal, delivery_fee, tax_amount, total_amount
+      customer_name,
+      phone_number,
+      delivery_type,
+      zone_id,
+      specific_address,
+      notes,
+      payment_proof_url,
+      items,
+      subtotal,
+      delivery_fee,
+      tax_amount,
+      total_amount,
     } = payload;
 
     // 1. Validate required fields
@@ -158,44 +165,59 @@ serve(async (req) => {
 
     if (WHATSAPP_PHONE_ID && WHATSAPP_TOKEN && RESTAURANT_PHONE) {
       try {
-        const deliveryInfo = delivery_type === 'delivery'
-          ? `📍 Zona ID: ${zone_id}\n🏠 Dirección: ${specific_address}`
-          : `🏪 PARA RECOGER EN LOCAL`;
+        const deliveryInfo =
+          delivery_type === 'delivery'
+            ? `🚚 Delivery — Zona: ${zone_id}, ${specific_address}`
+            : `🏪 Para recoger en local`;
 
-        const itemsSummary = validatedItems.map((item) => {
-          const label = item.name;
-          const drinks = item.drinks?.length ? ` + bebidas: [${item.drinks.join(', ')}]` : '';
-          const note = item.notes ? ` (${item.notes})` : '';
-          return `• x${item.quantity} ${label}${drinks}${note}`;
-        }).join('\n');
+        const itemsSummary = validatedItems
+          .map((item) => {
+            const drinks = item.drinks?.length ? ` + bebidas: [${item.drinks.join(', ')}]` : '';
+            const note = item.notes ? ` (${item.notes})` : '';
+            return `• x${item.quantity} ${item.name}${drinks}${note}`;
+          })
+          .join('\n');
 
-        await fetch(
-          `https://graph.facebook.com/v18.0/${WHATSAPP_PHONE_ID}/messages`,
-          {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${WHATSAPP_TOKEN}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              messaging_product: 'whatsapp',
-              to: RESTAURANT_PHONE,
-              type: 'interactive',
-              interactive: {
-                type: 'button',
-                body: {
-                  text: `🆕 NUEVO PEDIDO #${String(orderId).slice(0, 8).toUpperCase()}\n\n👤 ${customer_name}\n📱 ${phone_number}\n\n${deliveryInfo}\n\n📦 Productos:\n${itemsSummary}\n\n💰 Subtotal: L. ${calculatedSubtotal}\n🚚 Delivery: L. ${calculatedDeliveryFee}\n📊 ISV: L. ${calculatedTax}\n✅ TOTAL: L. ${calculatedTotal}\n\n💳 Comprobante: ${payment_proof_url}`,
-                },
-                action: {
-                  buttons: [
-                    { type: 'reply', reply: { id: `accept_${orderId}`, title: '✅ Aceptar' } },
-                    { type: 'reply', reply: { id: `reject_${orderId}`, title: '❌ Rechazar' } },
+        const WHATSAPP_TEMPLATE = Deno.env.get('WHATSAPP_TEMPLATE_NAME') ?? 'nuevo_pedido';
+
+        const waResponse = await fetch(`https://graph.facebook.com/v18.0/${WHATSAPP_PHONE_ID}/messages`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${WHATSAPP_TOKEN}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            messaging_product: 'whatsapp',
+            to: RESTAURANT_PHONE,
+            type: 'template',
+            template: {
+              name: WHATSAPP_TEMPLATE,
+              language: { code: 'es_HN' },
+              components: [
+                {
+                  type: 'body',
+                  parameters: [
+                    { type: 'text', text: String(orderId).slice(0, 8).toUpperCase() },
+                    { type: 'text', text: customer_name },
+                    { type: 'text', text: phone_number },
+                    { type: 'text', text: deliveryInfo },
+                    { type: 'text', text: itemsSummary },
+                    { type: 'text', text: `${calculatedTotal}` },
+                    { type: 'text', text: payment_proof_url },
                   ],
                 },
-              },
-            }),
-          }
-        );
+              ],
+            },
+          }),
+        });
+
+        // Save WhatsApp message ID so webhook can match replies to this order
+        const waResult = await waResponse.json();
+        console.log('WhatsApp API response:', JSON.stringify(waResult));
+        const wamid = waResult?.messages?.[0]?.id;
+        if (wamid) {
+          await supabase.from('orders').update({ whatsapp_message_id: wamid }).eq('id', orderId);
+        }
       } catch (whatsappError) {
         console.error('WhatsApp notification failed:', whatsappError);
         // Mark in notes but do NOT fail the order
@@ -206,16 +228,15 @@ serve(async (req) => {
       }
     }
 
-    return new Response(
-      JSON.stringify({ order_id: orderId }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
-    );
-
+    return new Response(JSON.stringify({ order_id: orderId }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 200,
+    });
   } catch (error) {
     console.error('process-order error:', error);
-    return new Response(
-      JSON.stringify({ error: (error as Error).message }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
-    );
+    return new Response(JSON.stringify({ error: (error as Error).message }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 400,
+    });
   }
 });

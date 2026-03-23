@@ -27,27 +27,38 @@ serve(async (req) => {
 
     // Extract message from WhatsApp webhook payload structure
     const message = body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
+    if (!message) {
+      return new Response('OK', { status: 200 });
+    }
 
-    if (message?.type === 'interactive') {
-      const buttonId: string = message.interactive?.button_reply?.id ?? '';
+    // Handle quick reply button presses from the template
+    // Meta sends button replies with context.id = wamid of the original template
+    const repliedToWamid = message.context?.id;
 
-      if (buttonId) {
-        // Button ID format: 'accept_{orderId}' or 'reject_{orderId}'
-        const underscoreIndex = buttonId.indexOf('_');
-        const action = buttonId.slice(0, underscoreIndex);         // 'accept' or 'reject'
-        const orderId = buttonId.slice(underscoreIndex + 1);       // UUID
+    if (repliedToWamid && message.type === 'button') {
+      const buttonText: string = (message.button?.text ?? '').toLowerCase();
 
-        const newStatus = action === 'accept' ? 'confirmed' : 'rejected';
+      // Find the order that matches this WhatsApp message ID
+      const { data: order, error: fetchError } = await supabase
+        .from('orders')
+        .select('id, status')
+        .eq('whatsapp_message_id', repliedToWamid)
+        .single();
+
+      if (fetchError || !order) {
+        console.error(`No order found for wamid ${repliedToWamid}:`, fetchError);
+      } else if (order.status === 'pending') {
+        const newStatus = buttonText === 'rechazar' ? 'rejected' : 'preparing';
 
         const { error } = await supabase
           .from('orders')
           .update({ status: newStatus, updated_at: new Date().toISOString() })
-          .eq('id', orderId);
+          .eq('id', order.id);
 
         if (error) {
-          console.error(`Failed to update order ${orderId} to ${newStatus}:`, error);
+          console.error(`Failed to update order ${order.id} to ${newStatus}:`, error);
         } else {
-          console.log(`Order ${orderId} updated to ${newStatus}`);
+          console.log(`Order ${order.id} → ${newStatus} via WhatsApp button`);
         }
       }
     }
