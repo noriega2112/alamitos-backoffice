@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 /// React router dom
 import { Routes, Route, Outlet } from 'react-router-dom';
@@ -257,6 +258,15 @@ function MainLayout() {
         </div>
       </div>
       <Footer />
+      <Toaster
+        position="bottom-center"
+        toastOptions={{
+          duration: 4000,
+          style: { fontSize: '14px' },
+          success: { duration: 3000 },
+          error: { duration: 5000 },
+        }}
+      />
     </div>
   );
 }

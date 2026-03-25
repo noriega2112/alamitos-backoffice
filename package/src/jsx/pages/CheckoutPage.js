@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { useZones } from '../../queries/useZones';
 import { selectCartItems, selectCartSubtotal, clearCart } from '../../store/slices/cartSlice';
 import { setActiveOrder } from '../../store/slices/orderSlice';
 import { supabase } from '../../supabaseClient';
-
-const TAX_RATE = 0.15;
+import EmptyCart from '../components/EmptyCart';
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
@@ -23,12 +23,75 @@ const CheckoutPage = () => {
   const [orderNotes, setOrderNotes] = useState('');
   const [paymentFile, setPaymentFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState(null);
 
   const selectedZone = zones.find((z) => z.id === Number.parseInt(selectedZoneId, 10));
   const deliveryFee = deliveryType === 'delivery' ? selectedZone?.delivery_fee || 0 : 0;
-  const taxAmount = subtotal * TAX_RATE;
-  const totalAmount = subtotal + deliveryFee + taxAmount;
+  const totalAmount = subtotal + deliveryFee;
+
+  // JS-based sticky for the summary card (CSS sticky broken by ancestor overflow:hidden)
+  const summaryColRef = useRef(null);
+  const summaryCardRef = useRef(null);
+  const isFixedRef = useRef(false);
+  const naturalWidthRef = useRef(0);
+  const naturalHeightRef = useRef(0);
+
+  useEffect(() => {
+    const col = summaryColRef.current;
+    const card = summaryCardRef.current;
+    if (!col || !card) return;
+
+    const handleScroll = () => {
+      if (window.innerWidth < 992) {
+        if (isFixedRef.current) {
+          card.style.cssText = '';
+          col.style.minHeight = '';
+          isFixedRef.current = false;
+        }
+        return;
+      }
+
+      if (!isFixedRef.current) {
+        naturalWidthRef.current = card.offsetWidth;
+        naturalHeightRef.current = card.offsetHeight;
+      }
+
+      const headerEl = document.querySelector('.header');
+      const headerH = headerEl ? headerEl.getBoundingClientRect().height : 0;
+      const colRect = col.getBoundingClientRect();
+      const topOffset = headerH + 16;
+
+      if (colRect.top < topOffset && !isFixedRef.current) {
+        col.style.minHeight = naturalHeightRef.current + 'px';
+        card.style.position = 'fixed';
+        card.style.top = topOffset + 'px';
+        card.style.left = colRect.left + 'px';
+        card.style.width = naturalWidthRef.current + 'px';
+        card.style.height = naturalHeightRef.current + 'px';
+        card.style.zIndex = '10';
+        isFixedRef.current = true;
+      } else if (colRect.top >= topOffset && isFixedRef.current) {
+        card.style.cssText = '';
+        col.style.minHeight = '';
+        isFixedRef.current = false;
+      }
+    };
+
+    const handleResize = () => {
+      if (isFixedRef.current) {
+        card.style.cssText = '';
+        col.style.minHeight = '';
+        isFixedRef.current = false;
+      }
+      handleScroll();
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const validate = () => {
     if (!customerName.trim()) return 'Nombre requerido';
@@ -44,12 +107,11 @@ const CheckoutPage = () => {
     e.preventDefault();
     const validationError = validate();
     if (validationError) {
-      setError(validationError);
+      toast.error(validationError);
       return;
     }
 
     setIsSubmitting(true);
-    setError(null);
 
     try {
       // 1. Upload payment proof to Supabase Storage
@@ -85,7 +147,7 @@ const CheckoutPage = () => {
           notes: orderNotes.trim(),
           subtotal: Math.round(subtotal * 100) / 100,
           delivery_fee: Math.round(deliveryFee * 100) / 100,
-          tax_amount: Math.round(taxAmount * 100) / 100,
+          tax_amount: 0,
           total_amount: Math.round(totalAmount * 100) / 100,
           payment_proof_url: publicUrl,
           items: orderItems,
@@ -103,37 +165,43 @@ const CheckoutPage = () => {
       // 5. Navigate to status page
       navigate(`/status/${data.order_id}`);
     } catch (err) {
-      setError(err.message);
+      toast.error(err.message);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   if (items.length === 0) {
-    return (
-      <div className="text-center py-5">
-        <h4>Tu carrito está vacío</h4>
-        <button className="btn btn-primary mt-3" onClick={() => navigate('/')}>
-          Ver Menú
-        </button>
-      </div>
-    );
+    return <EmptyCart />;
   }
 
   return (
     <div className="py-4">
-      <h3 className="mb-4">Checkout</h3>
-      {error && (
-        <div className="alert alert-danger alert-dismissible" role="alert">
-          {error}
-          <button type="button" className="btn-close" onClick={() => setError(null)} />
+      <div className="card-header border-0 pb-0">
+        <div className="folder-tab">
+          <button
+            onClick={() => navigate(-1)}
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              cursor: 'pointer',
+              color: 'inherit',
+              font: 'inherit',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <i className="fa-solid fa-arrow-left me-2"></i>
+            <h4 className="mb-0">Ir atras</h4>
+          </button>
         </div>
-      )}
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-lg-8">
             {/* Delivery Type */}
-            <div className="card mb-3 shadow-sm">
+            <div className="card dlab-bg">
               <div className="card-body">
                 <div className="card-body">
                   <h5 className="card-title">Tipo de entrega</h5>
@@ -264,10 +332,10 @@ const CheckoutPage = () => {
           </div>
 
           {/* Order Summary */}
-          <div className="col-lg-4">
-            <div className="card shadow-sm " style={{ top: 20 }}>
+          <div className="col-lg-4" ref={summaryColRef} style={{ alignSelf: 'flex-start' }}>
+            <div className="card dlab-bg" ref={summaryCardRef}>
               <div className="card-body">
-                <h5 className="mb-3">Tu pedido</h5>
+                <h4 className="cate-title mb-3">Tu pedido</h4>
                 {items.map((item) => (
                   <div key={item.id} className="d-flex justify-content-between mb-2 small">
                     <span className="text-truncate me-2">
@@ -277,41 +345,35 @@ const CheckoutPage = () => {
                       L.{' '}
                       {(
                         ((item.itemData.sale_price || item.itemData.price) +
-                          (item.drinks || []).reduce((s, d) => s + d.price, 0)) *
+                          (item.drinks || []).reduce((s, d) => s + d.price * (d.qty || 1), 0)) *
                         item.quantity
                       ).toFixed(2)}
                     </span>
                   </div>
                 ))}
-                <hr />
-                <ul className="list-unstyled mb-0">
-                  <li className="d-flex justify-content-between mb-2">
-                    <span>Subtotal</span>
-                    <span>L. {subtotal.toFixed(2)}</span>
-                  </li>
-                  {deliveryType === 'delivery' && (
-                    <li className="d-flex justify-content-between mb-2">
-                      <span>Delivery</span>
-                      <span>{selectedZone ? `L. ${Number(deliveryFee).toFixed(2)}` : '—'}</span>
-                    </li>
-                  )}
-                  <li className="d-flex justify-content-between mb-2">
-                    <span>ISV (15%)</span>
-                    <span>L. {taxAmount.toFixed(2)}</span>
-                  </li>
-                  <hr />
-                  <li className="d-flex justify-content-between fw-bold fs-5">
-                    <span>Total</span>
-                    <span>L. {totalAmount.toFixed(2)}</span>
-                  </li>
-                </ul>
-                <button type="submit" className="btn btn-primary w-100 mt-3" disabled={isSubmitting}>
+                <hr className="my-2 text-primary" style={{ opacity: '0.9' }} />
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <span>Subtotal</span>
+                  <h5 className="font-w500 mb-0">L. {subtotal.toFixed(2)}</h5>
+                </div>
+                {deliveryType === 'delivery' && (
+                  <div className="d-flex align-items-center justify-content-between mb-2">
+                    <span>Delivery</span>
+                    <h5 className="font-w500 mb-0">{selectedZone ? `L. ${Number(deliveryFee).toFixed(2)}` : '—'}</h5>
+                  </div>
+                )}
+                <hr className="my-2 text-primary" style={{ opacity: '0.9' }} />
+                <div className="d-flex align-items-center justify-content-between mb-3">
+                  <h4 className="font-w500 mb-0">Total</h4>
+                  <h3 className="font-w500 text-primary mb-0">L. {totalAmount.toFixed(2)}</h3>
+                </div>
+                <button type="submit" className="btn btn-primary btn-block w-100" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <>
                       <span className="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> Procesando...
                     </>
                   ) : (
-                    '🛍️ Realizar Pedido'
+                    'Realizar Pedido'
                   )}
                 </button>
               </div>

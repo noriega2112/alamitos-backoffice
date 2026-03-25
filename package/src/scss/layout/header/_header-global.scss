@@ -2,19 +2,16 @@
 // Header
 /////////////////
 .header {
-    // width: 100%;
     height: 5.5rem;
-    z-index: 1;
+    z-index: 3;
     position: relative;
     padding: 0rem;
-    background:var(--headerbg);
-    z-index: 3;
+    background: $white;
     padding-left: var(--space-right);
 	padding-top:0rem;
     transition: all .2s ease;
-	position:relative;
 	border-bottom: 1px solid #B3B3B3;
-	
+
 	&:before,
 	&:after{
 		content: "";
@@ -44,20 +41,17 @@
 		background: $white;
 		border-radius: 0 40px 0 0;
 	}
-	
+
     .header-content {
         height: 100%;
         padding-left: 0;
-        //padding-right: 10.875rem;
         align-items: center;
         display: flex;
 		 @include custommq($max: 1480px) {
 			padding-left:5.5rem;
 		 }
         @include respond ('laptop') {
-			//padding-left: 1.563rem;
 			padding-left: 3rem;
-			
 		}
 		@include respond ('tab-land') {
 			padding-left: 0rem;
@@ -70,7 +64,6 @@
 			padding-left:1.75rem;
 			padding-right:0;
 		}
-		
     }
     .navbar {
         padding: 0;
@@ -90,7 +83,66 @@
 	@include respond ('phone-land'){
 		padding-top:0;
 	}
-	
+
+	// Logo-only header variant
+	&.header-logo-only {
+		background: $white;
+		border-bottom: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 6rem;
+		padding: 0 !important;
+		padding-left: 0 !important;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 100% !important;
+		z-index: 1030;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+		&:before,
+		&:after {
+			display: none;
+		}
+
+		.header-logo-link {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.3s ease;
+
+			img {
+				height: 5.5rem;
+				object-fit: contain;
+			}
+		}
+
+		&.scrolled {
+			height: 4.5rem;
+
+			.header-logo-link img {
+				height: 4rem;
+			}
+		}
+
+		@include respond('phone') {
+			height: 5rem;
+
+			.header-logo-link img {
+				height: 4.5rem;
+			}
+
+			&.scrolled {
+				height: 4rem;
+
+				.header-logo-link img {
+					height: 3.5rem;
+				}
+			}
+		}
+	}
 }
 
 ////////////////////////
@@ -248,22 +300,21 @@ svg.pulse-svg {
 }
 
 [data-header-position="fixed"] {
-    .header {
+    .header:not(.header-logo-only) {
         position: fixed;
         top: 0;
         width: 100%;
     }
     .content-body {
-        padding-top: 7.5rem;
-		//height: calc(100vh - 5.5rem);
+        padding-top: 4.5rem;
 		@include respond('laptop'){
-			padding-top:7.5rem;
+			padding-top: 4.5rem;
 		}
 		@include respond('tab-land'){
-			padding-top: 7rem;
+			padding-top: 4rem;
 		}
 		@include respond('phone'){
-			padding-top: 5rem;
+			padding-top: 3.5rem;
 		}
     }
     .dlabnav {

@@ -7,7 +7,7 @@ export const useProducts = () =>
     queryFn: async () => {
       const { data, error } = await supabase
         .from('products')
-        .select('*, categories(name)')
+        .select('*, categories(name, is_drink_category)')
         .eq('is_active', true);
       if (error) throw error;
       return data;

@@ -6,18 +6,18 @@ INSERT INTO zones (name, delivery_fee, is_active) VALUES
   ('Zona Este', 55.00, true);
 
 -- Categories (sort_order controls display order, lower = first)
-INSERT INTO categories (id, name, sort_order) VALUES
-  (1, 'Bebidas', 10),
-  (2, 'Entradas', 6),
-  (3, 'Snacks', 7),
-  (4, 'Asados', 8),
-  (5, 'Para Compartir', 9),
-  (6, 'Come por L359', 3),
-  (7, 'Promos a Mitad de Precio', 4),
-  (8, 'Promos 2x1', 5),
-  (9, 'Come por L139', 1),
-  (10, 'Come por L199', 2)
-ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, sort_order = EXCLUDED.sort_order;
+INSERT INTO categories (id, name, sort_order, is_drink_category) VALUES
+  (1, 'Bebidas', 10, true),
+  (2, 'Entradas', 6, false),
+  (3, 'Snacks', 7, false),
+  (4, 'Asados', 8, false),
+  (5, 'Para Compartir', 9, false),
+  (6, 'Come por L359', 3, false),
+  (7, 'Promos a Mitad de Precio', 4, false),
+  (8, 'Promos 2x1', 5, false),
+  (9, 'Come por L139', 1, false),
+  (10, 'Come por L199', 2, false)
+ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, sort_order = EXCLUDED.sort_order, is_drink_category = EXCLUDED.is_drink_category;
 
 SELECT setval('categories_id_seq', (SELECT MAX(id) FROM categories));
 

@@ -2,13 +2,23 @@ import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper';
+import { Autoplay, Pagination, Navigation } from 'swiper';
 import 'swiper/css';
+import 'swiper/css/navigation';
 import { useProducts, usePromotions, useCategories } from '../../queries/useCatalog';
 import { selectActiveOrderId, clearActiveOrder } from '../../store/slices/orderSlice';
 import { selectCartCount } from '../../store/slices/cartSlice';
 import AddToCartModal from '../components/Menu/AddToCartModal';
 import { supabase } from '../../supabaseClient';
+import { PiFireBold, PiShoppingCartBold } from 'react-icons/pi';
+
+const CHIP_COLORS = [
+  { color: '#0066FF', contrast: '#fff' },
+  { color: '#FF8C00', contrast: '#fff' },
+  { color: '#00B4D8', contrast: '#fff' },
+  { color: '#FF1744', contrast: '#fff' },
+  { color: '#E91E90', contrast: '#fff' },
+];
 
 const MenuPage = () => {
   const dispatch = useDispatch();
@@ -26,8 +36,7 @@ const MenuPage = () => {
   const swiperRef = useRef(null);
   const navPlaceholderRef = useRef(null);
   const [navFixed, setNavFixed] = useState(false);
-  const [navPos, setNavPos] = useState({ left: 0, right: 0 });
-  const HEADER_H = 88; // 5.5rem × 16px
+  const [navPos, setNavPos] = useState({ left: 0, right: 0, top: 0 });
 
   // On mount: if there's an active order, check if still active
   useEffect(() => {
@@ -52,6 +61,15 @@ const MenuPage = () => {
       }))
       .filter((cat) => cat.products.length > 0);
   }, [categories, products]);
+
+  // Stable color mapping per category
+  const categoryColors = useMemo(() => {
+    const map = {};
+    groupedCategories.forEach((cat, i) => {
+      map[cat.id] = CHIP_COLORS[i % CHIP_COLORS.length];
+    });
+    return map;
+  }, [groupedCategories]);
 
   // Initialize active category once groups are ready
   useEffect(() => {
@@ -100,12 +118,14 @@ const MenuPage = () => {
     const handleScroll = () => {
       const el = navPlaceholderRef.current;
       if (!el) return;
+      const headerEl = document.querySelector('.header');
+      const headerH = headerEl ? headerEl.getBoundingClientRect().height : 64;
       const top = el.getBoundingClientRect().top;
-      if (top <= HEADER_H) {
+      if (top <= headerH) {
         const container = el.closest('.container');
         if (container) {
           const cr = container.getBoundingClientRect();
-          setNavPos({ left: cr.left, right: window.innerWidth - cr.right });
+          setNavPos({ left: cr.left, right: window.innerWidth - cr.right, top: headerH });
         }
         setNavFixed(true);
       } else {
@@ -121,7 +141,14 @@ const MenuPage = () => {
   }, [groupedCategories]);
 
   const scrollToCategory = (catId) => {
-    sectionRefs.current[catId]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const section = sectionRefs.current[catId];
+    if (!section) return;
+    const headerEl = document.querySelector('.header');
+    const headerH = headerEl ? headerEl.getBoundingClientRect().height : 0;
+    const navEl = document.querySelector('.category-nav-wrapper');
+    const navH = navEl ? navEl.getBoundingClientRect().height : 0;
+    const y = section.getBoundingClientRect().top + window.scrollY - headerH - navH - 8;
+    window.scrollTo({ top: y, behavior: 'smooth' });
   };
 
   const openModal = (item, type) => {
@@ -144,7 +171,7 @@ const MenuPage = () => {
       {/* Promotions Carousel */}
       {promotions.length > 0 && (
         <section>
-          <h3 className="mb-3">🔥 Promociones</h3>
+          <h4 className="category-tab"><PiFireBold size={28} className="me-1 text-danger" /> Promociones <PiFireBold size={28} className="ms-1 text-danger" /></h4>
           <div className="position-relative">
             <div className="swiper-pagination-banner"></div>
             <Swiper
@@ -199,65 +226,55 @@ const MenuPage = () => {
 
       {/* Categories Nav (fixed via scroll listener — position:sticky broken by overflow:hidden on #main-wrapper) */}
       {groupedCategories.length > 0 && (
-        <div ref={navPlaceholderRef} style={{ marginBottom: '1rem', height: navFixed ? 72 : 'auto' }}>
+        <div ref={navPlaceholderRef} style={{ marginBottom: '1rem', height: navFixed ? 56 : 'auto' }}>
           <div
-            className="bg-white py-2 px-3"
+            className="category-nav-wrapper"
             style={
               navFixed
                 ? {
                     position: 'fixed',
-                    top: HEADER_H,
+                    top: navPos.top,
                     left: navPos.left,
                     right: navPos.right,
                     zIndex: 10,
-                    // boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
                   }
-                : {
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                  }
+                : {}
             }
           >
+            <button className="category-nav-arrow category-nav-arrow-left" aria-label="Anterior">
+              <i className="fa-solid fa-chevron-left" />
+            </button>
             <Swiper
-              className="mySwiper-2"
-              slidesPerView={5}
-              spaceBetween={20}
-              modules={[]}
+              className="mySwiper-2 category-swiper"
+              slidesPerView="auto"
+              spaceBetween={8}
+              modules={[Navigation]}
+              navigation={{
+                prevEl: '.category-nav-arrow-left',
+                nextEl: '.category-nav-arrow-right',
+              }}
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
               }}
-              breakpoints={{
-                360: { slidesPerView: 2, spaceBetween: 20 },
-                600: { slidesPerView: 3, spaceBetween: 20 },
-                768: { slidesPerView: 4, spaceBetween: 20 },
-                1200: { slidesPerView: 3, spaceBetween: 20 },
-                1920: { slidesPerView: 5, spaceBetween: 20 },
-              }}
             >
-              {groupedCategories.map((cat) => (
-                <SwiperSlide key={cat.id}>
-                  <div
-                    className="cate-bx text-center"
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => scrollToCategory(cat.id)}
-                  >
+              {groupedCategories.map((cat) => {
+                const chipColor = categoryColors[cat.id];
+                return (
+                  <SwiperSlide key={cat.id} style={{ width: 'auto' }}>
                     <div
-                      className="card"
-                      style={
-                        activeCategory === cat.id
-                          ? { borderColor: 'var(--primary)', background: 'var(--primary)', color: '#fff' }
-                          : {}
-                      }
+                      className={`category-chip ${activeCategory === cat.id ? 'active' : ''}`}
+                      style={{ '--chip-color': chipColor.color, '--chip-contrast': chipColor.contrast }}
+                      onClick={() => scrollToCategory(cat.id)}
                     >
-                      <div className="card-body py-2">
-                        <h6 className="mb-0 font-w500" style={activeCategory === cat.id ? { color: '#fff' } : {}}>
-                          {cat.name}
-                        </h6>
-                      </div>
+                      {cat.name}
                     </div>
-                  </div>
-                </SwiperSlide>
-              ))}
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
+            <button className="category-nav-arrow category-nav-arrow-right" aria-label="Siguiente">
+              <i className="fa-solid fa-chevron-right" />
+            </button>
           </div>
         </div>
       )}
@@ -272,11 +289,11 @@ const MenuPage = () => {
           data-cat-id={cat.id}
           className="mb-5"
         >
-          <h4 className="mb-3">{cat.name}</h4>
-          <div className="row g-3">
-            {cat.products.map((product) => (
+          <h4 className="category-tab">{cat.name}</h4>
+          <div className="row g-3 category-row">
+            {cat.products.map((product, idx) => (
               <div key={product.id} className="col-6 col-md-4">
-                <div className="card h-100 shadow-sm">
+                <div className={`card h-100 category-card${idx === 0 ? ' category-card-first' : ''}`}>
                   {product.image_url && (
                     <img
                       src={product.image_url}
@@ -326,7 +343,7 @@ const CartFAB = () => {
   if (cartCount === 0) return null;
   return (
     <button
-      className="btn btn-primary rounded-circle position-fixed d-flex align-items-center justify-content-center"
+      className="btn rounded-circle position-fixed d-flex align-items-center justify-content-center"
       style={{
         bottom: 24,
         right: 24,
@@ -335,10 +352,13 @@ const CartFAB = () => {
         fontSize: 18,
         zIndex: 1000,
         boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+        backgroundColor: '#FF8C00',
+        borderColor: '#FF8C00',
+        color: '#fff',
       }}
       onClick={() => navigate('/cart')}
     >
-      🛒
+      <PiShoppingCartBold size={24} />
       <span
         className="badge bg-danger rounded-circle position-absolute"
         style={{

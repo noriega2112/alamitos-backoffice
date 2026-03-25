@@ -11,9 +11,9 @@ $body-bg: #ffffff;
 $body-color: #777777;
 $headings-color: #3d4152;
 // Typography
-$font-family-base: 'Roboto', sans-serif;
+$font-family-base: 'Montserrat', sans-serif;
 $headings-font-weight: 500;
-// $headings-font-family:        $fm;
+$headings-font-family: 'Bungee', cursive;
 
 $font-size-base: 0.875rem !default;
 $font-weight-base: 400 !default;
@@ -95,7 +95,7 @@ $colors: map-merge(
 );
 
 $primary: #069646 !default;
-$secondary: #ffe531 !default;
+$secondary: #3370aa !default;
 $success: #1fbf75 !default;
 $info: #33a9ff !default;
 $warning: #f2994a !default;
@@ -128,7 +128,7 @@ $dark: #7e808c;
   --rgba-secondary-8: #{rgba($secondary, 0.8)};
   --rgba-secondary-9: #{rgba($secondary, 0.9)};
   --font-family-base: #{$font-family-base};
-  --font-family-title: #{$font-family-base};
+  --font-family-title: #{$headings-font-family};
   --title: #{$headings-color};
 }
 
