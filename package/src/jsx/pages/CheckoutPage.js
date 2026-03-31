@@ -205,31 +205,29 @@ const CheckoutPage = () => {
               <div className="card-body">
                 <div className="card-body">
                   <h5 className="card-title">Tipo de entrega</h5>
-                  <div className="form-check mb-2">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      id="delivery"
-                      value="delivery"
-                      checked={deliveryType === 'delivery'}
-                      onChange={(e) => setDeliveryType(e.target.value)}
-                    />
-                    <label className="form-check-label" htmlFor="delivery">
-                      🚚 Entrega a domicilio
-                    </label>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      id="pickup"
-                      value="pickup"
-                      checked={deliveryType === 'pickup'}
-                      onChange={(e) => setDeliveryType(e.target.value)}
-                    />
-                    <label className="form-check-label" htmlFor="pickup">
-                      🏪 Pasar recogiendo
-                    </label>
+                  <div className="d-flex gap-2">
+                    <button
+                      type="button"
+                      className={`btn rounded-pill px-4 py-2 flex-fill ${
+                        deliveryType === 'delivery'
+                          ? 'btn-primary'
+                          : 'btn-outline-primary'
+                      }`}
+                      onClick={() => setDeliveryType('delivery')}
+                    >
+                      <i className="fa-solid fa-truck me-2"></i> Entrega a domicilio
+                    </button>
+                    <button
+                      type="button"
+                      className={`btn rounded-pill px-4 py-2 flex-fill ${
+                        deliveryType === 'pickup'
+                          ? 'btn-primary'
+                          : 'btn-outline-primary'
+                      }`}
+                      onClick={() => setDeliveryType('pickup')}
+                    >
+                      <i className="fa-solid fa-store me-2"></i> Pasar recogiendo
+                    </button>
                   </div>
                 </div>
 
