@@ -7,6 +7,8 @@ import { selectCartItems, selectCartSubtotal, clearCart } from '../../store/slic
 import { setActiveOrder } from '../../store/slices/orderSlice';
 import { supabase } from '../../supabaseClient';
 import EmptyCart from '../components/EmptyCart';
+import { useBusinessHours } from '../../queries/useBusinessHours';
+import ClosedModal from '../components/BusinessHours/ClosedModal';
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
@@ -14,6 +16,9 @@ const CheckoutPage = () => {
   const items = useSelector(selectCartItems);
   const subtotal = useSelector(selectCartSubtotal);
   const { data: zones = [] } = useZones();
+  const { data: hoursData } = useBusinessHours();
+  const isOpen = hoursData?.isOpen ?? true;
+  const schedule = hoursData?.schedule ?? [];
 
   const [deliveryType, setDeliveryType] = useState('delivery');
   const [customerName, setCustomerName] = useState('');
@@ -177,6 +182,7 @@ const CheckoutPage = () => {
 
   return (
     <div className="py-4">
+      <ClosedModal show={!isOpen} schedule={schedule} />
       <div className="card-header border-0 pb-0">
         <div className="folder-tab">
           <button
@@ -365,7 +371,7 @@ const CheckoutPage = () => {
                   <h4 className="font-w500 mb-0">Total</h4>
                   <h3 className="font-w500 text-primary mb-0">L. {totalAmount.toFixed(2)}</h3>
                 </div>
-                <button type="submit" className="btn btn-primary btn-block w-100" disabled={isSubmitting}>
+                <button type="submit" className="btn btn-primary btn-block w-100" disabled={isSubmitting || !isOpen}>
                   {isSubmitting ? (
                     <>
                       <span className="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> Procesando...
