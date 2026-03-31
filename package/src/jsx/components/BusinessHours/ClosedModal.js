@@ -21,10 +21,10 @@ function formatTime(timeStr) {
 
 const TODAY_DOW = getTodayDow();
 
-const ClosedModal = ({ show, schedule = [] }) => {
+const ClosedModal = ({ show, onHide, schedule = [] }) => {
   return (
-    <Modal show={show} centered backdrop="static" keyboard={false}>
-      <Modal.Header className="border-0 pb-0">
+    <Modal show={show} onHide={onHide} centered>
+      <Modal.Header closeButton className="border-0 pb-0">
         <Modal.Title className="w-100 text-center">
           <div style={{ fontSize: 40 }}>🍽️</div>
           <h4 className="mt-2 mb-0">Estamos cerrados</h4>

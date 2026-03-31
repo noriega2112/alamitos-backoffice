@@ -39,6 +39,11 @@ const MenuPage = () => {
   const schedule = hoursData?.schedule ?? [];
   const [showClosedModal, setShowClosedModal] = useState(false);
 
+  // Auto-show modal when store is detected as closed
+  useEffect(() => {
+    if (hoursData && !isOpen) setShowClosedModal(true);
+  }, [hoursData, isOpen]);
+
   const sectionRefs = useRef({});
   const swiperRef = useRef(null);
   const navPlaceholderRef = useRef(null);
@@ -344,7 +349,7 @@ const MenuPage = () => {
 
       {/* Modal */}
       <AddToCartModal show={!!modalItem} onHide={() => setModalItem(null)} item={modalItem} type={modalType} />
-      <ClosedModal show={showClosedModal || !isOpen} schedule={schedule} />
+      <ClosedModal show={showClosedModal} onHide={() => setShowClosedModal(false)} schedule={schedule} />
     </div>
   );
 };

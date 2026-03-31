@@ -19,6 +19,11 @@ const CheckoutPage = () => {
   const { data: hoursData } = useBusinessHours();
   const isOpen = hoursData?.isOpen ?? true;
   const schedule = hoursData?.schedule ?? [];
+  const [showClosedModal, setShowClosedModal] = useState(false);
+
+  useEffect(() => {
+    if (hoursData && !isOpen) setShowClosedModal(true);
+  }, [hoursData, isOpen]);
 
   const [deliveryType, setDeliveryType] = useState('delivery');
   const [customerName, setCustomerName] = useState('');
@@ -182,7 +187,7 @@ const CheckoutPage = () => {
 
   return (
     <div className="py-4">
-      <ClosedModal show={!isOpen} schedule={schedule} />
+      <ClosedModal show={showClosedModal} onHide={() => setShowClosedModal(false)} schedule={schedule} />
       <div className="card-header border-0 pb-0">
         <div className="folder-tab">
           <button

@@ -174,7 +174,7 @@ const CartPage = () => {
           </div>
         </div>
       </div>
-      <ClosedModal show={showClosedModal} schedule={schedule} />
+      <ClosedModal show={showClosedModal} onHide={() => setShowClosedModal(false)} schedule={schedule} />
     </div>
   );
 };
