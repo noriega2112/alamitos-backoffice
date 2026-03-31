@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -10,12 +10,19 @@ import {
 } from '../../store/slices/cartSlice';
 import { PiBeerBottleBold, PiNotepadBold } from 'react-icons/pi';
 import EmptyCart from '../components/EmptyCart';
+import { useBusinessHours } from '../../queries/useBusinessHours';
+import ClosedModal from '../components/BusinessHours/ClosedModal';
 
 const CartPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const items = useSelector(selectCartItems);
   const subtotal = useSelector(selectCartSubtotal);
+
+  const { data: hoursData } = useBusinessHours();
+  const isOpen = hoursData?.isOpen ?? true;
+  const schedule = hoursData?.schedule ?? [];
+  const [showClosedModal, setShowClosedModal] = useState(false);
 
   const handleDrinkQty = (itemId, drinks, drinkId, delta) => {
     const updated = drinks
@@ -151,13 +158,23 @@ const CartPage = () => {
                 <h4 className="font-w500 mb-0">Total</h4>
                 <h3 className="font-w500 text-primary mb-0">L. {subtotal.toFixed(2)}</h3>
               </div>
-              <button className="btn btn-primary btn-block w-100" onClick={() => navigate('/checkout')}>
+              <button
+                className="btn btn-primary btn-block w-100"
+                onClick={() => {
+                  if (!isOpen) {
+                    setShowClosedModal(true);
+                    return;
+                  }
+                  navigate('/checkout');
+                }}
+              >
                 Proceder al Checkout
               </button>
             </div>
           </div>
         </div>
       </div>
+      <ClosedModal show={showClosedModal} schedule={schedule} />
     </div>
   );
 };
