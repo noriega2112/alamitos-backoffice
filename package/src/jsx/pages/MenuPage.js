@@ -11,6 +11,8 @@ import { selectCartCount } from '../../store/slices/cartSlice';
 import AddToCartModal from '../components/Menu/AddToCartModal';
 import { supabase } from '../../supabaseClient';
 import { PiFireBold, PiShoppingCartBold } from 'react-icons/pi';
+import { useBusinessHours } from '../../queries/useBusinessHours';
+import ClosedModal from '../components/BusinessHours/ClosedModal';
 
 const CHIP_COLORS = [
   { color: '#0066FF', contrast: '#fff' },
@@ -31,6 +33,11 @@ const MenuPage = () => {
   const [modalItem, setModalItem] = useState(null);
   const [modalType, setModalType] = useState('product');
   const [activeCategory, setActiveCategory] = useState(null);
+
+  const { data: hoursData } = useBusinessHours();
+  const isOpen = hoursData?.isOpen ?? true;
+  const schedule = hoursData?.schedule ?? [];
+  const [showClosedModal, setShowClosedModal] = useState(false);
 
   const sectionRefs = useRef({});
   const swiperRef = useRef(null);
@@ -152,6 +159,10 @@ const MenuPage = () => {
   };
 
   const openModal = (item, type) => {
+    if (!isOpen) {
+      setShowClosedModal(true);
+      return;
+    }
     setModalItem(item);
     setModalType(type);
   };
@@ -333,6 +344,7 @@ const MenuPage = () => {
 
       {/* Modal */}
       <AddToCartModal show={!!modalItem} onHide={() => setModalItem(null)} item={modalItem} type={modalType} />
+      <ClosedModal show={showClosedModal || !isOpen} schedule={schedule} />
     </div>
   );
 };
