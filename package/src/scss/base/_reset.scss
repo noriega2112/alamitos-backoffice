@@ -47,6 +47,7 @@ body {
 	background-attachment: fixed;
 
 	@include respond('phone') {
+		background-image: url('../images/bg-alamitos-mobile.png');
 		background-attachment: scroll;
 		background-position: top center;
 	}
