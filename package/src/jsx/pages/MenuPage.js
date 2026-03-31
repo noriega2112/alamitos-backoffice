@@ -90,31 +90,31 @@ const MenuPage = () => {
     }
   }, [groupedCategories, activeCategory]);
 
-  // Scrollspy: observe each category section
+  // Scrollspy: track which category section is in view while scrolling
   useEffect(() => {
     if (groupedCategories.length === 0) return;
 
-    const visibilityMap = {};
+    const handleScrollSpy = () => {
+      const headerEl = document.querySelector('.header');
+      const headerH = headerEl ? headerEl.getBoundingClientRect().height : 0;
+      const navEl = document.querySelector('.category-nav-wrapper');
+      const navH = navEl ? navEl.getBoundingClientRect().height : 0;
+      const threshold = headerH + navH + 24;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          visibilityMap[entry.target.dataset.catId] = entry.intersectionRatio;
-        });
-        const best = Object.entries(visibilityMap).sort((a, b) => b[1] - a[1])[0];
-        if (best && Number(best[1]) > 0) {
-          setActiveCategory(Number(best[0]));
+      let currentId = groupedCategories[0].id;
+      for (const { id } of groupedCategories) {
+        const el = sectionRefs.current[id];
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= threshold) {
+          currentId = id;
         }
-      },
-      { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] },
-    );
+      }
+      setActiveCategory(currentId);
+    };
 
-    groupedCategories.forEach(({ id }) => {
-      const el = sectionRefs.current[id];
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    window.addEventListener('scroll', handleScrollSpy, { passive: true });
+    return () => window.removeEventListener('scroll', handleScrollSpy);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupedCategories]);
 
   // Slide swiper to active category

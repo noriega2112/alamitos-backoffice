@@ -5,12 +5,7 @@ const Footer = () => {
 	return (
 		<div className="footer">
 			<div className="copyright border-top">
-				<p>Copyright © Designed &amp; Developed by{" "}
-					<a href="http://dexignlab.com/" target="_blank"  rel="noreferrer">
-						DexignLab
-					</a>{" "}
-					{d.getFullYear()}
-				</p>
+				<p>Diseñado y desarrollado por Edwin Noriega {d.getFullYear()}</p>
 			</div>
 		</div>
 	);

@@ -46,6 +46,11 @@ body {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 
+	@include respond('phone') {
+		background-attachment: scroll;
+		background-position: top center;
+	}
+
 	&::before {
 		content: '';
 		position: fixed;
