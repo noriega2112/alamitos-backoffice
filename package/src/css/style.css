@@ -9981,6 +9981,9 @@ p {
   opacity: 0;
   transition: all 0.25s ease-in;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 #main-wrapper.show {
   opacity: 1;
@@ -10191,6 +10194,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   }
 }
 
+.content-body {
+  flex: 1;
+}
 .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl, .content-body .container-xxl {
   padding-top: 2.5rem;
   padding-right: 2.5rem;

@@ -252,7 +252,7 @@ function MainLayout() {
   return (
     <div id="main-wrapper" className={`show ${menuToggle ? 'menu-toggle' : ''}`}>
       <Nav />
-      <div className="content-body" style={{ minHeight: window.screen.height - 45 }}>
+      <div className="content-body">
         <div className="container">
           <Outlet />
         </div>
