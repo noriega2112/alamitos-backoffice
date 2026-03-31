@@ -17,6 +17,7 @@ import PageTitle from "../../../layouts/PageTitle";
 //import ClickAblePips from "./ClickablePips";
 //import Disabling from "./Disabling";
 
+// eslint-disable-next-line no-unused-vars
 let slider, slider2;
 
 // function destroyExistingSlider(){

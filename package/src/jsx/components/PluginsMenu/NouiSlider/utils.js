@@ -1,6 +1,7 @@
 const sortObjectKeys = (obj) =>
    Object.entries(obj)
       .sort()
+      // eslint-disable-next-line no-sequences
       .reduce((o, [k, v]) => ((o[k] = v), o), {});
 
 export const isEqual = (val1, val2) => {

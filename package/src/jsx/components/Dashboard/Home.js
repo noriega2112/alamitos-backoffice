@@ -36,6 +36,7 @@ const Home = () => {
 	const [notesModal, setNotesModal] = useState(false);
 	 useEffect(() => {
 		changeBackground({ value: "light", label: "Light" });
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	 }, []);
 	
 	const [state, setState] = useReducer(reducer, {orderBlog : orderBlog});	

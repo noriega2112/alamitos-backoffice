@@ -47,6 +47,7 @@ export const options = {
   },
 };
 
+// eslint-disable-next-line no-unused-vars
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 export const data = {

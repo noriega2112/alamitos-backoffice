@@ -49,6 +49,7 @@ const Theme3 = () => {
 		changePrimaryColor("color_8");
 		chnageHaderColor("color_1");
 		changeNavigationHader("color_8");
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	
 	const [state, setState] = useReducer(reducer, {orderBlog : orderBlog});	

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default ({ children }) => {
+const Main = ({ children }) => {
     //console.log('render Main')
     return (
         <div>
@@ -8,3 +8,5 @@ export default ({ children }) => {
         </div>
     )
 }
+
+export default Main;

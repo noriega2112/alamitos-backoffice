@@ -1,7 +1,6 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 //import ApexCharts from 'apexcharts';
-import { Link } from "react-router-dom";
 
 class StatisticChart extends React.Component {  
 	constructor(props) {

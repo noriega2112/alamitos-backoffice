@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import swal from "sweetalert";
 import Select from 'react-select';

@@ -1,10 +1,9 @@
 /// Menu
-import React, { Component, useContext, useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 
 /// Scroll
 import PerfectScrollbar from "react-perfect-scrollbar";
 import Collapse from 'react-bootstrap/Collapse';
-import Button from 'react-bootstrap/Button';
 
 /// Link
 import { Link, NavLink } from "react-router-dom";

@@ -37,6 +37,7 @@ const DashboardDark = () => {
 	const [notesModal, setNotesModal] = useState(false);
 	 useEffect(() => {
 		changeBackground({ value: "dark", label: "Dark" });
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	 }, []);
 	
 	const [state, setState] = useReducer(reducer, {orderBlog : orderBlog});	

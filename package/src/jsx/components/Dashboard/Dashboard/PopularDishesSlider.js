@@ -1,6 +1,6 @@
-import React,  { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide,  } from "swiper/react";
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide,  } from "swiper/react";
 import { Autoplay } from "swiper";
 import "swiper/css";
 
@@ -25,9 +25,9 @@ const PopularDishesSlider = () =>{
     function hendleleClick(type,id){
         let temp = dataheart.map((data) => {
             if (id === data.id) {
-               if(type=="heart"){
+               if(type==="heart"){
                     return  { ...data, heart: !data.heart };
-               }else if(type=="check"){
+               }else if(type==="check"){
                     return  { ...data, check: !data.check };
                }
             }

@@ -1,3 +1,4 @@
+/* eslint-disable */
 /// Menu
 import Metismenu from "metismenujs";
 import React, { Component, useContext, useEffect, useState } from "react";

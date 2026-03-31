@@ -1,7 +1,5 @@
 import React from 'react';
 import { Swiper, SwiperSlide,  } from "swiper/react";
-import { Link } from "react-router-dom";
-import {Dropdown} from 'react-bootstrap';
 import { Autoplay } from "swiper";
 import "swiper/css";
 

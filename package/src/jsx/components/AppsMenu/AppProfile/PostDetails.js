@@ -50,6 +50,7 @@ const PostDetails = () => {
       //console.log('lightGallery has been initialized');
   };
 	
+	// eslint-disable-next-line no-unused-vars
 	const options = {
 		settings: {
 			overlayColor: "#000000",

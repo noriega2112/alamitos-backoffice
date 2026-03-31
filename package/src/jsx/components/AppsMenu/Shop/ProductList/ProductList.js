@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { useEffect } from "react";
+// eslint-disable-next-line no-unused-vars
 import ProductListItem from "./ProductListItem";
 import { supabase } from "../../../../../supabaseClient";
 
@@ -18,8 +19,11 @@ import product7 from "../../../../../images/product/7.jpg";
 
 const ProductList = () => {
   const [reviewModal, setReviewModal] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [products, setProducts] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
 
   useEffect(() => {

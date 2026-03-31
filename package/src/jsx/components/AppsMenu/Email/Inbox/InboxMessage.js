@@ -23,16 +23,19 @@ const InboxMessage = () => {
   useEffect(() => {
     setData(document.querySelectorAll("#patientTable_basic_table tbody tr"));
     chackboxFun();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [test]);
 
   // Active pagginarion
   activePag.current === 0 && chageData(0, sort);
   // paggination
+  // eslint-disable-next-line no-unused-vars
   let paggination = Array(Math.ceil(data.length / sort))
     .fill()
     .map((_, i) => i + 1);
 
   // Active paggination & chage data
+  // eslint-disable-next-line no-unused-vars
   const onClick = (i) => {
     activePag.current = i;
     chageData(activePag.current * sort, (activePag.current + 1) * sort);

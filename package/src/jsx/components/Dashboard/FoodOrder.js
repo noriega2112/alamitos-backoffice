@@ -102,8 +102,9 @@ const FoodOrder = () =>{
                         <div className="card-body px-3">
                             <div className="tracker-bx">
                                 <h4 className="cate-title mb-4">Order Tracker</h4>
-                                <iframe 
-                                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14448.885880295826!2d75.81852004999999!3d25.128202299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1658125804979!5m2!1sen!2sin" 
+                                <iframe
+                                    title="Order Tracker Map"
+                                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14448.885880295826!2d75.81852004999999!3d25.128202299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1658125804979!5m2!1sen!2sin"
                                     width="600" height="450" style={{border:"0"}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 <div>
                                     <p className="fs-18">Your Address</p>

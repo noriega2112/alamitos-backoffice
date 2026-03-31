@@ -34,13 +34,13 @@ const Theme7 = () => {
 	const [detailsModal, setDetailsModal] = useState(false);
 	const [notesModal, setNotesModal] = useState(false);
 	const { changeBackground,
-        changeSideBarStyle,
         //changeContainerPosition,
         changePrimaryColor,
         chnageSidebarColor,
         chnageHaderColor,
         changeNavigationHader
      } = useContext(ThemeContext);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => {
 		changeBackground({ value: "light", label: "Light" });
 		//changeSideBarStyle({ value: "mini", label: "Mini" });
@@ -49,6 +49,7 @@ const Theme7 = () => {
 		changePrimaryColor("color_7");
 		chnageHaderColor("color_10");
 		changeNavigationHader("color_7");
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	
 	const [state, setState] = useReducer(reducer, {orderBlog : orderBlog});	

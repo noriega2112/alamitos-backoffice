@@ -39,6 +39,7 @@ const Nouislider = (props) => {
             instanceRef.current = null;
          }
       };
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [sliderContainer]);
 
    const clickOnPip = (pip) => {
@@ -109,6 +110,7 @@ const Nouislider = (props) => {
       setSlider(sliderComponent);
    };
 
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    useEffect(() => {
       const { disabled } = props;
       const sliderHTML = sliderContainer.current;
@@ -126,12 +128,14 @@ const Nouislider = (props) => {
                });
          }
       };
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    useEffect(() => {
       if (slider) {
          setClickableListeners();
       }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [slider]);
 
    const { start, disabled, range, step } = props;
@@ -143,6 +147,7 @@ const Nouislider = (props) => {
          setClickableListeners();
       }
       toggleDisable(disabled);
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [start, disabled, range, step]);
 
    const { id, className, style } = props;
